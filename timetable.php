@@ -1,8 +1,10 @@
 <?php $dbHost = 'localhost'; $dbUser = 'root'; $dbPass = ''; $dbName = 'timetable'; 
 ///Основной гинератор------------------------------------------------------
-	if(!isset($_POST)) {
-		echo "Да";
-	}
+	if ($_POST["AJAX"] == "1") {
+		echo "green";
+	} else {
+	
+	
 	$day_id = $_POST["week"];
 	$groups_id = $_POST["groups"];
 	$teachers_id_num = $_POST["teacher_id"];
@@ -55,12 +57,11 @@
 		//var_dump($dump_id);
 	}
 	array_multisort($dump_id);
- ?>
-
+	echo "
 <!DOCTYPE html>
-<html lang="ru">
+<html lang=\"ru\">
 <head>
-	<meta charset="UTF-8">
+	<meta charset=\"UTF-8\">
 	<title>Расписание КЦПТ</title>
 	<style>
 		table
@@ -152,21 +153,21 @@
 			color: #fff;
 		}
 	</style>
-	<script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+	<script type=\"text/javascript\" src=\"jquery-3.3.1.min.js\"></script>
 
-	<script type="text/javascript">
+	<script type=\"text/javascript\">
 		
 		function funcSeccess(data){
 			alert(data);
 		};
 
 		$(document).ready(function (){
-			$(".checkbox-btn").bind("click",function(){
+			$(\".checkbox-btn\").bind(\"click\",function(){
 				$.ajax({
-					url:"index.php",
-					type:"POST",
-					data: {teacher:"lol"} ,
-					datatype: "json",
+					url:\"timetable.php\",
+					type:\"POST\",
+					data: {AJAX:\"1\"} ,
+					datatype: \"html\",
 					success: funcSeccess
 				});
 
@@ -176,14 +177,14 @@
 </head>
 <body>	
 	<h1>Расписание КЦПТ</h1>
-	<form name="ginerat"  action="" method="post">
+	<form name=\"ginerat\"  action=\"\" method=\"post\">
 	<label>Статус:</label><br><br>
-	<div class="checkbox-btn">
-		<input type="checkbox" name="teacher" value = "1" <?php if(isset($_POST["teacher"])){echo "checked =\"\" ";} ?>>
-		<div><span class="slide"></span></div>
-	</div>
-
-<?php 
+	<div class=\"checkbox-btn\">
+		<input type=\"checkbox\" name=\"teacher\" value = \"1\"";
+		if(isset($_POST["teacher"])){echo "checked =\"\" ";} 
+		echo ">
+		<div><span class=\"slide\"></span></div>
+	</div>";
 	///----------------------------------------------------------------------
 	if ($_POST["teacher"] == '1') {
 		$query_teacher = "SELECT teachers.name FROM teachers;";
@@ -265,10 +266,8 @@
 	///-----------------------------------------------------------------
 	echo "<input type='submit' name='send' value='поиск'>";
 	
-		 ?>
-	</form>
-	<hr>
-<?php 
+	echo "</form>
+	<hr>";
 ///Зависимость от списка "Группа" и вывод группы на экран
 	if($_POST["teacher"] === "1")
 		{
@@ -572,6 +571,7 @@
 	}
 
 	mysqli_close($link);
+echo "</body>
+</html>";
+}
 ?>
-</body>
-</html>
