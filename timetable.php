@@ -68,17 +68,39 @@
 	<script type="text/javascript">
 		
 		function funcSeccess(data){
+			//var answer = JSON.parse(data);
 			alert(data);
 		};
 
 		$(document).ready(function (){
+			$("select[name='groups']").bind("click", function(){
+				$.ajax({
+					url:"request.php",
+					type:"POST",
+					data: { 
+						status: $("input[name='teacher']").val(),
+						group: $("select[name='groups']").val(),
+						week: $("select[name='week']").val()
+					} ,
+					datatype: "html",
+					success: funcSeccess
+				});
+				$
+			});
+
+			$("select[name='groups'].check_sel").bind("click", function(){
+				$("select[name='groups'].check_sel").remuve
+			});
+
 			$(".checkbox-btn").bind("click",function(){
-				
+
 				$.ajax({
 					url:"request.php",
 					type:"POST",
 					data: {
-						status: $("input[name='teacher']").val()
+						status: $("input[name='teacher']").val(),
+						group: $("select[name='groups']").val(),
+						week: $("select[name='week']").val()
 					} ,
 					datatype: "html",
 					success: funcSeccess
@@ -139,7 +161,7 @@
 	
 		$rows_groups  = mysqli_num_rows($result_groups);
 	 	echo "<label style=\"display: inline-block; width: 85px\">Группа:</label><br>";
-		echo "<select name='groups' id='groups' value = '".$day_id."'>";
+		echo "<select name='groups' class= 'check_sel' action='' id='groups' value = '".$day_id."'>";
 	
 		for ($g = 1;$g<$rows_groups+1;++$g){
 			$row_groups = mysqli_fetch_row($result_groups);
@@ -164,7 +186,7 @@
 	$rows_week  = mysqli_num_rows($result_week);
 
 	echo "<label style=\"display: inline-block; width: 125px\">День недели:</label><br>";
-	echo "<select name='week' id='week'>";
+	echo "<select name='week' id='week' value = '".$day_id."'>";
 	for ($g = 1;$g<$rows_week+1;++$g){
 		$row_week = mysqli_fetch_row($result_week);
 
