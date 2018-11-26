@@ -62,96 +62,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Расписание КЦПТ</title>
-	<style>
-		table
-		{	
-			margin-left: 5px;
-			border-collapse: collapse;
-		}
-		td,th
-		{
-			border: 1px solid #333;
-		}
-		body
-		{
-			margin: 0;
-			padding: 0;
-			font-family: sans-serif;
-			background: #f3f3f3;
-		}
-		.checkbox-btn
-		{  
-			transform: translate(1%,-50%);
-			width: 180px;
-			height: 30px;
-		}
-		.checkbox-btn input
-		{
-			position: relative;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			display: block;
-			cursor: pointer;
-			opacity: 0;
-			z-index: 1;
-		}
-		.checkbox-btn div
-		{
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			border: 4px solid #000;
-			border-radius: 4px;
-			overflow:  hidden;
-		}
-		.checkbox-btn div .slide
-		{
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 40px;
-			height: 30px;
-			background: #000;
-			transition: 0.5s;
-		}
-		.checkbox-btn input:checked + div .slide
-		{
-			transform: translateX(140px);
-		
-		}
-		.checkbox-btn .slide:before
-		{
-			content: 'Преподаватель';
-			position: absolute;
-			top: 0;
-			left: -140px;
-			text-align: center;
-			width: 140px;
-			height: 100%;
-			line-height: 30px;
-			background: #00da00;
-			font-weight: bold;
-			color: #fff;
-		}
-		.checkbox-btn .slide:after
-		{
-			content: 'Студент';
-			position: absolute;
-			top: 0;
-			right: -140px;
-			text-align: center;
-			width: 140px;
-			height: 100%;
-			line-height: 30px;
-			background: #ff002d;
-			font-weight: bold;
-			color: #fff;
-		}
-	</style>
+	<link rel="stylesheet" href="Style.css">
 	<script type="text/javascript" src="jquery-3.3.1.min.js"></script>
 
 	<script type="text/javascript">
@@ -162,14 +73,22 @@
 
 		$(document).ready(function (){
 			$(".checkbox-btn").bind("click",function(){
+				
 				$.ajax({
-					url:"index.php",
+					url:"request.php",
 					type:"POST",
-					data: {teacher:"lol"} ,
-					datatype: "json",
+					data: {
+						status: $("input[name='teacher']").val()
+					} ,
+					datatype: "html",
 					success: funcSeccess
 				});
 
+				if ($("input[name='teacher']").val() == "1") {
+					$("input[name='teacher']").val("0");
+				}else{
+					$("input[name='teacher']").val("1");
+				}
 			});
 		});
 	</script>
