@@ -45,16 +45,7 @@
 	$teacher_id = mysqli_query($link, $teacher_name_id)
 	or die ("ошибка2 ".mysqli_connect_error($link));
 	$teacher_rows_id = mysqli_num_rows($teacher_id);
-	$dump_id = array();
 
-	
-	for ($t = 0;$t<$teacher_rows_id; ++$t){
-		$teacher_row_id = mysqli_fetch_row($teacher_id);
-		//var_dump($teacher_row_id[0]);
-		array_push($dump_id,$teacher_row_id[0]);
-		//var_dump($dump_id);
-	}
-	array_multisort($dump_id);
  ?>
 
 <!DOCTYPE html>
@@ -68,31 +59,60 @@
 	<script type="text/javascript">
 		
 		function funcSeccess(data){
-			//var answer = JSON.parse(data);
-			alert(data);
+			var answer = JSON.parse(data);
+			//append()
+			//detach()
+			//remove()
+			//
+			alert(answer.teacher+ " " + answer.group+ " " + answer.week);
 		};
 
 		$(document).ready(function (){
-			$("select[name='groups']").bind("click", function(){
-				$.ajax({
-					url:"request.php",
-					type:"POST",
-					data: { 
-						status: $("input[name='teacher']").val(),
-						group: $("select[name='groups']").val(),
-						week: $("select[name='week']").val()
-					} ,
-					datatype: "html",
-					success: funcSeccess
-				});
-				$
+			$("select[name='groups']").on("click", function(){
+				if ($(this).hasClass("op-sel")){
+					$.ajax({
+						url:"request.php",
+						type:"POST",
+						data: { 
+							status: $("input[name='teacher']").val(),
+							group: $("select[name='groups']").val(),
+							week: $("select[name='week']").val()
+						} ,
+						datatype: "html",
+						success: funcSeccess
+					});
+					$("select[name='groups']").removeClass("open");
+					$(this).removeClass("op-sel");
+				} 
+				else 
+				{
+					$(this).addClass("op-sel");
+				}
 			});
 
-			$("select[name='groups'].check_sel").bind("click", function(){
-				$("select[name='groups'].check_sel").remuve
+			$("select[name='week']").on("click", function(){
+				if ($(this).hasClass("op-sel")){
+					$.ajax({
+						url:"request.php",
+						type:"POST",
+						data: { 
+							status: $("input[name='teacher']").val(),
+							group: $("select[name='groups']").val(),
+							week: $("select[name='week']").val()
+						} ,
+						datatype: "html",
+						success: funcSeccess
+					});
+					$("select[name='groups']").removeClass("open");
+					$(this).removeClass("op-sel");
+				} 
+				else 
+				{
+					$(this).addClass("op-sel");
+				}
 			});
 
-			$(".checkbox-btn").bind("click",function(){
+			$("div.checkbox-btn input[name='teacher']").bind("click",function(){
 
 				$.ajax({
 					url:"request.php",
@@ -161,7 +181,7 @@
 	
 		$rows_groups  = mysqli_num_rows($result_groups);
 	 	echo "<label style=\"display: inline-block; width: 85px\">Группа:</label><br>";
-		echo "<select name='groups' class= 'check_sel' autofocus='' id='groups' value = '".$day_id."'>";
+		echo "<select name='groups' class= 'groups' autofocus='' id='groups' value = '".$day_id."'>";
 	
 		for ($g = 1;$g<$rows_groups+1;++$g){
 			$row_groups = mysqli_fetch_row($result_groups);
@@ -211,7 +231,7 @@
 	<hr>
 <?php 
 ///Зависимость от списка "Группа" и вывод группы на экран
-	if($_POST["teacher"] === "1")
+	if($_POST["teacher"] === "0")
 		{
 			$query_teachers = "SELECT teachers.name FROM teachers WHERE (teachers.id = '".$teachers_id_num."');";
 

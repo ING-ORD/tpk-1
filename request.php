@@ -1,9 +1,16 @@
 <?php 
-$status = $_POST["status"]."\n";
-$group = $_POST["group"]."\n";
-$week = $_POST["week"]."\n";
+$dbHost = 'localhost'; 
+$dbUser = 'root'; 
+$dbPass = ''; 
+$dbName = 'timetable'; 
 
-//$answer = array("teacher" => "Да", "group" => "Нет", "week" => "Возможно");
+$link = mysqli_connect($dbHost,$dbUser,$dbPass,$dbName) or die ("ошибка".mysqli_connect_error($link));
+
+$status = $_POST["status"];
+$group = $_POST["group"];
+$week = $_POST["week"];
+
+$answer = array("teacher" => "Да", "group" => "Нет", "week" => "Возможно");
 //echo json_encode($answer);
-echo json_encode($_POST);
+echo json_encode($answer);
 ?>
