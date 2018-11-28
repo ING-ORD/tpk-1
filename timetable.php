@@ -56,7 +56,6 @@
 	}
 	array_multisort($dump_id);
  ?>
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -161,7 +160,7 @@
 	
 		$rows_groups  = mysqli_num_rows($result_groups);
 	 	echo "<label style=\"display: inline-block; width: 85px\">Группа:</label><br>";
-		echo "<select name='groups' class= 'check_sel' action='' id='groups' value = '".$day_id."'>";
+		echo "<select name='groups' class= 'check_sel' autofocus='' id='groups' value = '".$day_id."'>";
 	
 		for ($g = 1;$g<$rows_groups+1;++$g){
 			$row_groups = mysqli_fetch_row($result_groups);
