@@ -1,16 +1,79 @@
-<?php 
-$dbHost = 'localhost'; 
-$dbUser = 'root'; 
-$dbPass = ''; 
-$dbName = 'timetable'; 
+<?php  
+///==================================================================================================================================================================
+///		ОГЛАВЛЕНИЕ:
+///  	
+///  	1)Получене данных
+///		2)Генератор{Выборка элементов таблицы в массив}
+///		3)Отправка массива
+///  
+///==================================================================================================================================================================
 
-$link = mysqli_connect($dbHost,$dbUser,$dbPass,$dbName) or die ("ошибка".mysqli_connect_error($link));
+///==================================================================================================================================================================
+///
+///  Получене данных
+///  
+///==================================================================================================================================================================
 
-$status = $_POST["status"];
-$group = $_POST["group"];
-$week = $_POST["week"];
+	$status = $_POST["status"];
+	$group = $_POST["group"];
+	$week = $_POST["week"];
 
-$answer = array("teacher" => "Да", "group" => "Нет", "week" => "Возможно");
-//echo json_encode($answer);
-echo json_encode($answer);
-?>
+	$answer = array("number"=>"","lesson"=>"","teacher"=>"","room"=>"");
+
+
+///==================================================================================================================================================================
+///
+///  Основной гинератор
+///  
+///==================================================================================================================================================================
+
+	$dbHost = 'localhost'; 
+	$dbUser = 'root'; 
+	$dbPass = ''; 
+	$dbName = 'timetable'; 
+
+	$link = mysqli_connect($dbHost,$dbUser,$dbPass,$dbName) or die ("ошибка".mysqli_connect_error($link));
+
+	// if(){
+
+	// }else{
+
+	// }
+
+
+
+	// if($day_id != '7')
+	// 	{
+	// 		$query_add = " AND timetable.day = '".$day_id."'";
+	// 	}else{
+	// 		$query_add = "";
+	// 	}
+	
+
+	$timetable_q = "SELECT timetable.number,lessons.name ,teachers.name ,rooms.name FROM timetable INNER JOIN lessons ON timetable.lesson = lessons.id INNER JOIN teachers ON timetable.teacher = teachers.id INNER JOIN rooms ON timetable.room = rooms.id WHERE (timetable.groupname = '".$group."' AND timetable.day = '".$week."') ORDER BY timetable.number;";
+
+
+	$timetable = mysqli_query($link, $timetable_q) or die ("ошибка2 ".mysqli_connect_error($link));
+	$rows = mysqli_num_rows($timetable);
+	for ($i=1; $i < $rows; $i++) { 
+		$row = mysqli_fetch_row($timetable);
+
+		$answer["number"] = $row[0];
+		$answer["lesson"] = $row[1];
+		$answer["teacher"] = $row[2];
+		$answer["room"] = $row[3];
+
+	}
+
+
+	mysqli_close($link);
+
+///==================================================================================================================================================================
+///
+///  Отправка массива
+///  
+///==================================================================================================================================================================
+
+	echo json_encode($answer);
+
+ ?>
