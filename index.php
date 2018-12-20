@@ -60,7 +60,11 @@
 		alert("ss")
 		function funcSeccess(data){
 			var answer = JSON.parse(data);
-			alert(answer.number + " " + answer.lesson + " " + answer.teacher + " " + answer.room);
+			var request = "";
+			for(i=0;i<12;i++){
+				request += answer[i].number + " " + answer[i].lesson + " " + answer[i].teacher + " " + answer[i].room +"\n";
+			}
+			alert(request);
 		};
 
 		$(document).ready(function (){

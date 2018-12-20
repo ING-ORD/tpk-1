@@ -18,7 +18,20 @@
 	$group = $_POST["group"];
 	$week = $_POST["week"];
 
-	$answer = array("number"=>"","lesson"=>"","teacher"=>"","room"=>"");
+	$answer = array(
+		array("number"=>"1","lesson"=>"","teacher"=>"","room"=>""),
+		array("number"=>"2","lesson"=>"","teacher"=>"","room"=>""),
+		array("number"=>"3","lesson"=>"","teacher"=>"","room"=>""),
+		array("number"=>"4","lesson"=>"","teacher"=>"","room"=>""),
+		array("number"=>"5","lesson"=>"","teacher"=>"","room"=>""),
+		array("number"=>"6","lesson"=>"","teacher"=>"","room"=>""),
+		array("number"=>"7","lesson"=>"","teacher"=>"","room"=>""),
+		array("number"=>"8","lesson"=>"","teacher"=>"","room"=>""),
+		array("number"=>"9","lesson"=>"","teacher"=>"","room"=>""),
+		array("number"=>"10","lesson"=>"","teacher"=>"","room"=>""),
+		array("number"=>"11","lesson"=>"","teacher"=>"","room"=>""),
+		array("number"=>"12","lesson"=>"","teacher"=>"","room"=>"")
+	);
 
 
 ///==================================================================================================================================================================
@@ -55,14 +68,22 @@
 
 	$timetable = mysqli_query($link, $timetable_q) or die ("ошибка2 ".mysqli_connect_error($link));
 	$rows = mysqli_num_rows($timetable);
-	for ($i=1; $i < $rows; $i++) { 
+	for ($i=0; $i < $rows; $i++) { 
 		$row = mysqli_fetch_row($timetable);
-
-		$answer["number"] = $row[0];
-		$answer["lesson"] = $row[1];
-		$answer["teacher"] = $row[2];
-		$answer["room"] = $row[3];
-
+		for($j = 0;$j<12;$j++){
+			if($answer[(int)$row[0]-1]["lesson"] == "" and $answer[$j]["number"] == $row[0]){
+				$answer[(int)$row[0]-1]["number"] = $row[0];
+				$answer[(int)$row[0]-1]["lesson"] = $row[1];
+				$answer[(int)$row[0]-1]["teacher"] = $row[2];
+				$answer[(int)$row[0]-1]["room"] = $row[3];
+			}else if ($answer[(int)$row[0]-1]["lesson"] != "" and $answer[$j]["number"] == $row[0]){
+				// $j++;
+				$answer[(int)$row[0]-1]["number"] = $row[0];
+				$answer[(int)$row[0]-1]["lesson"] .= " | ".$row[1];
+				$answer[(int)$row[0]-1]["teacher"] .= " | ".$row[2];
+				$answer[(int)$row[0]-1]["room"] .= " | ".$row[3];
+			}
+		}
 	}
 
 
