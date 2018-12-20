@@ -17,8 +17,9 @@
 	$status = $_POST["status"];
 	$group = $_POST["group"];
 	$week = $_POST["week"];
+	
+	$answer = array(array("number"=>"1","lesson"=>"","teacher"=>"","room"=>""),array("number"=>"2","lesson"=>"","teacher"=>"","room"=>""),array("number"=>"3","lesson"=>"","teacher"=>"","room"=>""),array("number"=>"4","lesson"=>"","teacher"=>"","room"=>""),array("number"=>"5","lesson"=>"","teacher"=>"","room"=>""),array("number"=>"6","lesson"=>"","teacher"=>"","room"=>""),array("number"=>"7","lesson"=>"","teacher"=>"","room"=>""),array("number"=>"8","lesson"=>"","teacher"=>"","room"=>""),array("number"=>"9","lesson"=>"","teacher"=>"","room"=>""),array("number"=>"10","lesson"=>"","teacher"=>"","room"=>""),array("number"=>"11","lesson"=>"","teacher"=>"","room"=>""),array("number"=>"12","lesson"=>"","teacher"=>"","room"=>""));
 
-	$answer = array("number"=>"","lesson"=>"","teacher"=>"","room"=>"");
 
 
 ///==================================================================================================================================================================
@@ -54,15 +55,21 @@
 
 
 	$timetable = mysqli_query($link, $timetable_q) or die ("ошибка2 ".mysqli_connect_error($link));
+	$repeat = 0;
 	$rows = mysqli_num_rows($timetable);
-	for ($i=1; $i < $rows; $i++) { 
+	for ($i=0; $i < $rows ; $i++) { 
 		$row = mysqli_fetch_row($timetable);
+		for ($j = 0; $j <13 ; $i++){
+			if (($row[0] == $answer[$i]["number"]) and ((int)$row[0] != $repeat )){
+				$answer[$i]["number"] = $row[0];
+				$answer[$i]["lesson"] = $row[1];
+				$answer[$i]["teacher"] = $row[2];
+				$answer[$i]["room"] = $row[3];	
+				$repeat = $row[0];
+			}/*else if ($row[0] == $repeat) {
 
-		$answer["number"] = $row[0];
-		$answer["lesson"] = $row[1];
-		$answer["teacher"] = $row[2];
-		$answer["room"] = $row[3];
-
+			}*/
+		}
 	}
 
 

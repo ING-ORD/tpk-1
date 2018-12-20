@@ -60,7 +60,48 @@
 		alert("ss")
 		function funcSeccess(data){
 			var answer = JSON.parse(data);
-			alert(answer.number + " " + answer.lesson + " " + answer.teacher + " " + answer.room);
+			var answer_s = [[],[],[],[],[],[],[],[],[],[],[],[]];
+			alert (answer[11].number)
+
+			// for (var i = 0 ; i < 12 ; i++)
+			// {
+
+			// 	for (var j = 0 ; j < 12 ; j++) 
+			// 	{
+
+			// 		if (i == answer[j].number)
+			// 		{
+			// 			answer_s[i].push(answer[j].number);
+			// 			answer_s[i].push(answer[j].lesson);
+			// 			answer_s[i].push(answer[j].teacher);
+			// 			answer_s[i].push(answer[j].room);
+
+			// 			// $(reques).html(answer[i].number);
+			// 			// $(reques).html(answer[i].lesson);
+			// 			// $(reques).html(answer[i].teacher);
+			// 			// $(reques).html(answer[i].room);
+			// 		}
+
+			// 	}
+
+
+
+			// }
+
+			for (var i = 0; i < answer.length; i++) {
+				for (var j = 1; j < 5; j++) {
+					reques = ".group_timetable"+" .table_"+ (i+1) + " .cell_" + j;
+					if (j == 1) {
+						$(reques).html(answer[i].number);
+					}else if (j == 2) {
+						$(reques).html(answer[i].lesson);
+					}else if (j == 3) {
+						$(reques).html(answer[i].teacher);
+					}else if (j == 4) {
+						$(reques).html(answer[i].room);
+					}
+				}
+			}
 		};
 
 		$(document).ready(function (){
@@ -532,7 +573,7 @@
 		<div class="weekend">
 			
 		</div>
-		<div class="week_day">
+		<div class="group_timetable">
 			<table>
 				<tr class="table_of_contents"><th>Урок</th><th>Название предмета</th><th>Преподаватель</th><th>Кабинет</th></tr>
 				<tr class="table_1">
