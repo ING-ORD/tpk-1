@@ -56,13 +56,49 @@
 	<link rel="stylesheet" href="Style.css">
 	<script type="text/javascript" src="jquery-3.3.1.min.js"></script>
 
+	<!-- JavaScript (JQuery) -->
+
 	<script type="text/javascript">
 		alert("ss")
+		
+		function check_answer (answer,i){
+			var html;
+			if (answer[i].lesson.indexOf("|") != -1) {
+				var lesson_1 = answer[i].lesson.substring(0,answer[i].lesson.indexOf("|"));
+				var teacher_1 = answer[i].teacher.substring(0,answer[i].teacher.indexOf("|"));
+				var room_1 = answer[i].room.substring(0,answer[i].room.indexOf("|"));
+
+				var lesson_2 = answer[i].lesson.substring(answer[i].lesson.indexOf("|")+1,answer[i].lesson.length);
+				var teacher_2 = answer[i].teacher.substring(answer[i].teacher.indexOf("|")+1,answer[i].teacher.length);
+				var room_2 = answer[i].room.substring(answer[i].room.indexOf("|")+1,answer[i].room.length);
+
+				html = "<tr class=\"table_"+i+"\"> <td class=\"cell_1\" rowspan =\"2\" >"+answer[i].number+"</td> <td class=\"cell_2\">"+lesson_1+"</td> <td class=\"cell_3\">"+teacher_1+"</td> <td class=\"cell_4\">"+room_1+"</td> </tr> <tr class=\"table_"+i+"\"> <td class=\"cell_2\">"+lesson_2+"</td> <td class=\"cell_3\">"+teacher_2+"</td> <td class=\"cell_4\">"+room_1+"</td> </tr>";
+				return html;
+			}else{
+				html = "<tr class=\"table_"+ i +"\"><td class=\"cell_1\">"+ answer[i].number +"</td><td class=\"cell_2\">"+ answer[i].lesson +"</td><td class=\"cell_3\">"+ answer[i].teacher +"</td><td class=\"cell_4\">"+ answer[i].room +"</td></tr>";
+				return html;
+			}
+			
+		}
+
 		function funcSeccess(data){
 			var answer = JSON.parse(data);
 			var request = "";
-			for(i=0;i<12;i++){
-				request += answer[i].number + " " + answer[i].lesson + " " + answer[i].teacher + " " + answer[i].room +"\n";
+			for (var i = 0; i < answer.length; i++) {
+				if(i==0){
+					$("#week_day").html("");
+					$("#week_day").append("<tr class=\"table_of_contents\"><th>Урок</th><th>Название предмета</th><th>Преподаватель</th><th>Кабинет</th></tr>");
+				}
+					
+					$("#week_day").append( check_answer( answer,i ) );
+					/*else if (j == 2) {
+						$(request).html(answer[i].lesson);
+					}else if (j == 3) {
+						$(request).html(answer[i].teacher);
+					}else if (j == 4) {
+						$(request).html(answer[i].room);
+					}*/
+				
 			}
 			alert(request);
 		};
@@ -70,7 +106,10 @@
 		$(document).ready(function (){
 
 			$("select[name='groups']").on("click", function(){
+
+
 				if ($(this).hasClass("op-sel")){
+
 					$.ajax({
 						url:"request.php",
 						type:"POST",
@@ -135,6 +174,9 @@
 			});
 		});
 	</script>
+
+	<!--End JavaScript (Jquery)!-->
+
 </head>
 <body>	
 	<h1>Расписание КЦПТ</h1>
@@ -537,7 +579,7 @@
 			
 		</div>
 		<div class="week_day">
-			<table>
+			<table id="week_day">
 				<tr class="table_of_contents"><th>Урок</th><th>Название предмета</th><th>Преподаватель</th><th>Кабинет</th></tr>
 				<tr class="table_1">
 					<td class="cell_1"></td>
