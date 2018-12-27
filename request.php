@@ -15,22 +15,26 @@
 ///==================================================================================================================================================================
 
 	$status = $_POST["status"];
-	$group = $_POST["group"];
+	if ($status == 0){
+		$group = $_POST["group"];
+	}else{
+		$teacher = $_POST["teacher"];
+	}
 	$week = $_POST["week"];
 
 	$answer = array(
-		array("number"=>"1","lesson"=>"","teacher"=>"","room"=>""),
-		array("number"=>"2","lesson"=>"","teacher"=>"","room"=>""),
-		array("number"=>"3","lesson"=>"","teacher"=>"","room"=>""),
-		array("number"=>"4","lesson"=>"","teacher"=>"","room"=>""),
-		array("number"=>"5","lesson"=>"","teacher"=>"","room"=>""),
-		array("number"=>"6","lesson"=>"","teacher"=>"","room"=>""),
-		array("number"=>"7","lesson"=>"","teacher"=>"","room"=>""),
-		array("number"=>"8","lesson"=>"","teacher"=>"","room"=>""),
-		array("number"=>"9","lesson"=>"","teacher"=>"","room"=>""),
-		array("number"=>"10","lesson"=>"","teacher"=>"","room"=>""),
-		array("number"=>"11","lesson"=>"","teacher"=>"","room"=>""),
-		array("number"=>"12","lesson"=>"","teacher"=>"","room"=>"")
+		array("number"=>"1","lesson"=>"","list"=>"","room"=>""),
+		array("number"=>"2","lesson"=>"","list"=>"","room"=>""),
+		array("number"=>"3","lesson"=>"","list"=>"","room"=>""),
+		array("number"=>"4","lesson"=>"","list"=>"","room"=>""),
+		array("number"=>"5","lesson"=>"","list"=>"","room"=>""),
+		array("number"=>"6","lesson"=>"","list"=>"","room"=>""),
+		array("number"=>"7","lesson"=>"","list"=>"","room"=>""),
+		array("number"=>"8","lesson"=>"","list"=>"","room"=>""),
+		array("number"=>"9","lesson"=>"","list"=>"","room"=>""),
+		array("number"=>"10","lesson"=>"","list"=>"","room"=>""),
+		array("number"=>"11","lesson"=>"","list"=>"","room"=>""),
+		array("number"=>"12","lesson"=>"","list"=>"","room"=>"")
 	);
 
 
@@ -46,24 +50,14 @@
 	$dbName = 'timetable'; 
 
 	$link = mysqli_connect($dbHost,$dbUser,$dbPass,$dbName) or die ("ошибка".mysqli_connect_error($link));
-
-	// if(){
-
-	// }else{
-
-	// }
-
-
-
-	// if($day_id != '7')
-	// 	{
-	// 		$query_add = " AND timetable.day = '".$day_id."'";
-	// 	}else{
-	// 		$query_add = "";
-	// 	}
 	
-
-	$timetable_q = "SELECT timetable.number,lessons.name ,teachers.name ,rooms.name FROM timetable INNER JOIN lessons ON timetable.lesson = lessons.id INNER JOIN teachers ON timetable.teacher = teachers.id INNER JOIN rooms ON timetable.room = rooms.id WHERE (timetable.groupname = '".$group."' AND timetable.day = '".$week."') ORDER BY timetable.number;";
+	if ($status == 0) 
+	{
+		$timetable_q = "SELECT timetable.number,lessons.name ,teachers.name ,rooms.name FROM timetable INNER JOIN lessons ON timetable.lesson = lessons.id INNER JOIN teachers ON timetable.teacher = teachers.id INNER JOIN rooms ON timetable.room = rooms.id WHERE (timetable.groupname = '".$group."' AND timetable.day = '".$week."') ORDER BY timetable.number;";
+	}else
+	{
+		$timetable_q = "SELECT timetable.number,lessons.name ,groups.name ,rooms.name FROM timetable INNER JOIN lessons ON timetable.lesson = lessons.id INNER JOIN groups ON timetable.groupname = groups.id INNER JOIN rooms ON timetable.room = rooms.id WHERE (timetable.teacher = '".$teacher."' AND timetable.day = '".$week."') ORDER BY timetable.number;";
+	}
 
 
 	$timetable = mysqli_query($link, $timetable_q) or die ("ошибка2 ".mysqli_connect_error($link));
@@ -74,13 +68,13 @@
 			if($answer[(int)$row[0]-1]["lesson"] == "" and $answer[$j]["number"] == $row[0]){
 				$answer[(int)$row[0]-1]["number"] = $row[0];
 				$answer[(int)$row[0]-1]["lesson"] = $row[1];
-				$answer[(int)$row[0]-1]["teacher"] = $row[2];
+				$answer[(int)$row[0]-1]["list"] = $row[2];
 				$answer[(int)$row[0]-1]["room"] = $row[3];
 			}else if ($answer[(int)$row[0]-1]["lesson"] != "" and $answer[$j]["number"] == $row[0]){
 				// $j++;
 				$answer[(int)$row[0]-1]["number"] = $row[0];
 				$answer[(int)$row[0]-1]["lesson"] .= " | ".$row[1];
-				$answer[(int)$row[0]-1]["teacher"] .= " | ".$row[2];
+				$answer[(int)$row[0]-1]["list"] .= " | ".$row[2];
 				$answer[(int)$row[0]-1]["room"] .= " | ".$row[3];
 			}
 		}

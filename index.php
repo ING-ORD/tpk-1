@@ -61,66 +61,125 @@
 	<script type="text/javascript">
 		alert("ss")
 		
-		function check_answer (answer,i){
+		function check_day (answer,i){
 			var html;
 			if (answer[i].lesson.indexOf("|") != -1) {
 				var lesson_1 = answer[i].lesson.substring(0,answer[i].lesson.indexOf("|"));
-				var teacher_1 = answer[i].teacher.substring(0,answer[i].teacher.indexOf("|"));
+				var teacher_1 = answer[i].list.substring(0,answer[i].list.indexOf("|"));
 				var room_1 = answer[i].room.substring(0,answer[i].room.indexOf("|"));
 
 				var lesson_2 = answer[i].lesson.substring(answer[i].lesson.indexOf("|")+1,answer[i].lesson.length);
-				var teacher_2 = answer[i].teacher.substring(answer[i].teacher.indexOf("|")+1,answer[i].teacher.length);
+				var teacher_2 = answer[i].list.substring(answer[i].list.indexOf("|")+1,answer[i].list.length);
 				var room_2 = answer[i].room.substring(answer[i].room.indexOf("|")+1,answer[i].room.length);
 
 				html = "<tr class=\"table_"+i+"\"> <td class=\"cell_1\" rowspan =\"2\" >"+answer[i].number+"</td> <td class=\"cell_2\">"+lesson_1+"</td> <td class=\"cell_3\">"+teacher_1+"</td> <td class=\"cell_4\">"+room_1+"</td> </tr> <tr class=\"table_"+i+"\"> <td class=\"cell_2\">"+lesson_2+"</td> <td class=\"cell_3\">"+teacher_2+"</td> <td class=\"cell_4\">"+room_1+"</td> </tr>";
 				return html;
 			}else{
-				html = "<tr class=\"table_"+ i +"\"><td class=\"cell_1\">"+ answer[i].number +"</td><td class=\"cell_2\">"+ answer[i].lesson +"</td><td class=\"cell_3\">"+ answer[i].teacher +"</td><td class=\"cell_4\">"+ answer[i].room +"</td></tr>";
+				html = "<tr class=\"table_"+ i +"\"><td class=\"cell_1\">"+ answer[i].number +"</td><td class=\"cell_2\">"+ answer[i].lesson +"</td><td class=\"cell_3\">"+ answer[i].list +"</td><td class=\"cell_4\">"+ answer[i].room +"</td></tr>";
 				return html;
 			}
 			
 		}
 
+		function check_week (answer,i){
+			var html;
+			// if(answer)
+		}
+
+
+		function funcList (data){
+			var answer = JSON.parse(data);
+			for (var i = 0 ; i<answer.length ; i++){
+				if(i==0){
+					$(".list").html("");
+				}
+				$(".list").append("<option value='"+(i+1)+"'>"+answer[i]+"</option>");
+			}
+		}
+
+
 		function funcSeccess(data){
 			var answer = JSON.parse(data);
-			var request = "";
-			for (var i = 0; i < answer.length; i++) {
+			for (var i = 0; i < answer.length; i++) 
+			{
 				if(i==0){
 					$("#week_day").html("");
 					$("#week_day").append("<tr class=\"table_of_contents\"><th>Урок</th><th>Название предмета</th><th>Преподаватель</th><th>Кабинет</th></tr>");
 				}
-					
-					$("#week_day").append( check_answer( answer,i ) );
-					/*else if (j == 2) {
-						$(request).html(answer[i].lesson);
-					}else if (j == 3) {
-						$(request).html(answer[i].teacher);
-					}else if (j == 4) {
-						$(request).html(answer[i].room);
-					}*/
-				
+				$("#week_day").append( check_day( answer,i ) );
 			}
-			alert(request);
+			
 		};
 
 		$(document).ready(function (){
 
-			$("select[name='groups']").on("click", function(){
+			$("select.list").on("click", function(){
 
 
 				if ($(this).hasClass("op-sel")){
+					if($("input.status").val() == "0")
+					{
+						$.ajax({
+							url:"request.php",
+							type:"POST",
+							data: { 
+								status: $("input.status").val(),
+								group: $("select.list").val(),
+								week: $("select#week").val()
+							} ,
+							datatype: "json",
+							success: funcSeccess
+						});
+					}else
+					{
+						$.ajax({
+							url:"request.php",
+							type:"POST",
+							data: { 
+								status: $("input.status").val(),
+								teacher: $("select.list").val(),
+								week: $("select#week").val()
+							} ,
+							datatype: "json",
+							success: funcSeccess
+						});
+					}
+					$("select.list").removeClass("open");
+					$(this).removeClass("op-sel");
+				} 
+				else 
+				{
+					$(this).addClass("op-sel");
+				}
+			});
 
-					$.ajax({
-						url:"request.php",
-						type:"POST",
-						data: { 
-							status: $("input[name='teacher']").val(),
-							group: $("select[name='groups']").val(),
-							week: $("select[name='week']").val()
-						} ,
-						datatype: "html",
-						success: funcSeccess
-					});
+			$("select#week").on("click", function(){
+				if ($(this).hasClass("op-sel")){
+					if($("input.status").val() == "0"){
+						$.ajax({
+							url:"request.php",
+							type:"POST",
+							data: { 
+								status: $("input.status").val(),
+								group: $("select.list").val(),
+								week: $("select#week").val()
+							} ,
+							datatype: "json",
+							success: funcSeccess
+						});
+					}else{
+						$.ajax({
+							url:"request.php",
+							type:"POST",
+							data: { 
+								status: $("input.status").val(),
+								teacher: $("select.list").val(),
+								week: $("select#week").val()
+							} ,
+							datatype: "json",
+							success: funcSeccess
+						});
+					}
 					$("select[name='groups']").removeClass("open");
 					$(this).removeClass("op-sel");
 				} 
@@ -130,45 +189,45 @@
 				}
 			});
 
-			$("select[name='week']").on("click", function(){
-				if ($(this).hasClass("op-sel")){
-					$.ajax({
-						url:"request.php",
-						type:"POST",
-						data: { 
-							status: $("input[name='teacher']").val(),
-							group: $("select[name='groups']").val(),
-							week: $("select[name='week']").val()
-						} ,
-						datatype: "html",
-						success: funcSeccess
-					});
-					$("select[name='groups']").removeClass("open");
-					$(this).removeClass("op-sel");
-				} 
-				else 
-				{
-					$(this).addClass("op-sel");
-				}
-			});
+			$("div.status input.status").on("click",function(){
 
-			$("div.checkbox-btn input[name='teacher']").bind("click",function(){
-				if ($("input[name='teacher']").val() == "1") {
-					$("input[name='teacher']").val("0");
-				}else{
-					$("input[name='teacher']").val("1");
-				}
 				$.ajax({
-					url:"request.php",
+					url:"list_request.php",
 					type:"POST",
 					data: {
-						status: $("input[name='teacher']").val(),
-						group: $("select[name='groups']").val(),
-						week: $("select[name='week']").val()
-					} ,
-					datatype: "html",
-					success: funcSeccess
+						status: $("input.status").val()
+					},
+					datatype:"json",
+					success: funcList
 				});
+
+				if ($("input.status").val() == "0") {
+					$("input.status").val("1");
+					$.ajax({
+						url:"request.php",
+						type:"POST",
+						data: {
+							status: $("input.status").val(),
+							teacher: $("select.list").val(),
+							week: $("select#week").val()
+						} ,
+						datatype: "json",
+						success: funcSeccess
+					});
+				}else{
+					$("input.status").val("0");
+					$.ajax({
+						url:"request.php",
+						type:"POST",
+						data: {
+							status: $("input.status").val(),
+							group: $("select.list").val(),
+							week: $("select#week").val()
+						} ,
+						datatype: "json",
+						success: funcSeccess
+					});
+				}
 
 				
 			});
@@ -182,36 +241,36 @@
 	<h1>Расписание КЦПТ</h1>
 	<form name="ginerat"  action="" method="post">
 	<label>Статус:</label><br><br>
-	<div class="checkbox-btn">
-		<input type="checkbox" name="teacher" value = "0" >
+	<div class="status">
+		<input type="checkbox" class="status" value = "0" >
 		<div><span class="slide"></span></div>
 	</div>
 
 <?php 
 	///----------------------------------------------------------------------
-	if ($_POST["teacher"] == '1') {
-		$query_teacher = "SELECT teachers.name FROM teachers;";
+	// if ($_POST["teacher"] == '1') {
+		// $query_teacher = "SELECT teachers.name FROM teachers;";
 
-		$result_teacher = mysqli_query($link,$query_teacher) 
-		or die("ошибка ".mysqli_connect_error($link));
-		$rows_teacher  = mysqli_num_rows($result_teacher);
+		// $result_teacher = mysqli_query($link,$query_teacher) 
+		// or die("ошибка ".mysqli_connect_error($link));
+		// $rows_teacher  = mysqli_num_rows($result_teacher);
 		
- 		echo "<label style=\"display: inline-block; width: 85px\">Группа:</label><br>";
-		echo "<select name='teacher_id' id='teacher_id' value = '".$teachers_id."'>";
+ 	// 	echo "<label style=\"display: inline-block; width: 85px\">Группа:</label><br>";
+		// echo "<select name='teacher' id='teacher' value = '".$teachers_id."'>";
 
-		for ($g = 1;$g<$rows_teacher+1;++$g){
-			$row_teacher = mysqli_fetch_row($result_teacher);
+		// for ($g = 1;$g<$rows_teacher+1;++$g){
+		// 	$row_teacher = mysqli_fetch_row($result_teacher);
 
-			for ($l = 0;$l < 1;++$l){
-				echo "<option value = \"".$g."\">";
-				echo "<a href =\"#\">".$row_teacher[$l]."</a>";
-			}
-			echo "</option>";
-		}
-		mysqli_free_result($result_teacher);
-		echo "</select><br><br>";
+		// 	for ($l = 0;$l < 1;++$l){
+		// 		echo "<option value = \"".$g."\">";
+		// 		echo "<a href =\"#\">".$row_teacher[$l]."</a>";
+		// 	}
+		// 	echo "</option>";
+		// }
+		// mysqli_free_result($result_teacher);
+		// echo "</select><br><br>";
 
-	} else {
+	// } else {
 	
 		$query_groups = "SELECT groups.name FROM groups;";
 	
@@ -221,23 +280,20 @@
 		
 	
 		$rows_groups  = mysqli_num_rows($result_groups);
-	 	echo "<label style=\"display: inline-block; width: 85px\">Группа:</label><br>";
-		echo "<select name='groups' class= 'groups' autofocus='' id='groups' value = '".$day_id."'>";
+	 	echo "<label id=\"group_l\" style=\"display: inline-block; width: 85px\">Группа:</label><br>";
+		echo "<select name='groups' class= 'list' id='groups'>";
 	
 		for ($g = 1;$g<$rows_groups+1;++$g){
 			$row_groups = mysqli_fetch_row($result_groups);
-	
-			for ($l = 0;$l < 1;++$l){
-				echo "<option ";
-				if ($_POST["groups"] == $g){echo "selected='".$_POST["groups"]."'";}
-				echo " value = \"".$g."\">";
-				echo "<a href =\"#\">".$row_groups[$l]."</a>";
-			}
+			echo "<option ";
+			if ($g == 1){echo "selected";}
+			echo " value = \"".$g."\">";
+			echo "<a href =\"#\">".$row_groups[0]."</a>";
 			echo "</option>";
 		}
 		mysqli_free_result($result_groups);
 		echo "</select><br><br>";
-	}
+	// }
 	///----------------------------------------------------------------
 
 	$query_week = "SELECT week.name FROM week;";
