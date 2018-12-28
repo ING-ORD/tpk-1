@@ -83,7 +83,11 @@
 
 		function check_week (answer,i){
 			var html;
-			// if(answer)
+			if(answer[i].lesson.indexOf("|") != -1){
+
+			}else{
+				html = "<tr class=\"table_ "+ i +"\"> <td class=\"cell_1\">"+ i +"</td> <td class=\"cell_2\">"+ answer[0][i].lesson_list +"</td> <td class=\"cell_3\">"+ answer[0][i].room +"</td> <td class=\"cell_4\">"+ answer[1][i].lesson_list +"</td> <td class=\"cell_5\">"+ answer[1][i].room +"</td> <td class=\"cell_6\">"+ answer[2][i].lesson_list +"</td> <td class=\"cell_7\">"+ answer[2][i].room +"</td> <td class=\"cell_8\">"+ answer[3][i].lesson_list +"</td> <td class=\"cell_9\">"+ answer[3][i].room +"</td> <td class=\"cell_10\">"+ answer[4][i].lesson_list +"</td> <td class=\"cell_11\">"+ answer[4][i].room +"</td> <td class=\"cell_12\">"+ answer[5][i].lesson_list +"</td> <td class=\"cell_13\">"+ answer[5][i].room +"</td> </tr>";
+			}
 		}
 
 
