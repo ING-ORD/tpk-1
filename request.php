@@ -39,112 +39,112 @@
 	}else{
 		$answer = array(
 			array( 
-				"number"=>"1",
-				"Пн"=>array("lesson_list"=>"","room"=>""),
-				"Вт"=>array("lesson_list"=>"","room"=>""),
-				"Ср"=>array("lesson_list"=>"","room"=>""),
-				"Чт"=>array("lesson_list"=>"","room"=>""),
-				"Пт"=>array("lesson_list"=>"","room"=>""),
-				"Сб"=>array("lesson_list"=>"","room"=>"")
+				1,
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>"")
 			),
 			array( 
-				"number"=>"2",
-				"Пн"=>array("lesson_list"=>"","room"=>""),
-				"Вт"=>array("lesson_list"=>"","room"=>""),
-				"Ср"=>array("lesson_list"=>"","room"=>""),
-				"Чт"=>array("lesson_list"=>"","room"=>""),
-				"Пт"=>array("lesson_list"=>"","room"=>""),
-				"Сб"=>array("lesson_list"=>"","room"=>"")
+				2,
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>"")
 			),
 			array( 
-				"number"=>"3",
-				"Пн"=>array("lesson_list"=>"","room"=>""),
-				"Вт"=>array("lesson_list"=>"","room"=>""),
-				"Ср"=>array("lesson_list"=>"","room"=>""),
-				"Чт"=>array("lesson_list"=>"","room"=>""),
-				"Пт"=>array("lesson_list"=>"","room"=>""),
-				"Сб"=>array("lesson_list"=>"","room"=>"")
+				3,
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>"")
 			),
 			array( 
-				"number"=>"4",
-				"Пн"=>array("lesson_list"=>"","room"=>""),
-				"Вт"=>array("lesson_list"=>"","room"=>""),
-				"Ср"=>array("lesson_list"=>"","room"=>""),
-				"Чт"=>array("lesson_list"=>"","room"=>""),
-				"Пт"=>array("lesson_list"=>"","room"=>""),
-				"Сб"=>array("lesson_list"=>"","room"=>"")
+				4,
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>"")
 			),
 			array( 
-				"number"=>"5",
-				"Пн"=>array("lesson_list"=>"","room"=>""),
-				"Вт"=>array("lesson_list"=>"","room"=>""),
-				"Ср"=>array("lesson_list"=>"","room"=>""),
-				"Чт"=>array("lesson_list"=>"","room"=>""),
-				"Пт"=>array("lesson_list"=>"","room"=>""),
-				"Сб"=>array("lesson_list"=>"","room"=>"")
+				5,
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>"")
 			),
 			array( 
-				"number"=>"6",
-				"Пн"=>array("lesson_list"=>"","room"=>""),
-				"Вт"=>array("lesson_list"=>"","room"=>""),
-				"Ср"=>array("lesson_list"=>"","room"=>""),
-				"Чт"=>array("lesson_list"=>"","room"=>""),
-				"Пт"=>array("lesson_list"=>"","room"=>""),
-				"Сб"=>array("lesson_list"=>"","room"=>"")
+				6,
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>"")
 			),
 			array( 
-				"number"=>"7",
-				"Пн"=>array("lesson_list"=>"","room"=>""),
-				"Вт"=>array("lesson_list"=>"","room"=>""),
-				"Ср"=>array("lesson_list"=>"","room"=>""),
-				"Чт"=>array("lesson_list"=>"","room"=>""),
-				"Пт"=>array("lesson_list"=>"","room"=>""),
-				"Сб"=>array("lesson_list"=>"","room"=>"")
+				7,
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>"")
 			),
 			array( 
-				"number"=>"8",
-				"Пн"=>array("lesson_list"=>"","room"=>""),
-				"Вт"=>array("lesson_list"=>"","room"=>""),
-				"Ср"=>array("lesson_list"=>"","room"=>""),
-				"Чт"=>array("lesson_list"=>"","room"=>""),
-				"Пт"=>array("lesson_list"=>"","room"=>""),
-				"Сб"=>array("lesson_list"=>"","room"=>"")
+				8,
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>"")
 			),
 			array( 
 				9,
 				array("lesson_list"=>"","room"=>""),
-				"Вт"=>array("lesson_list"=>"","room"=>""),
-				"Ср"=>array("lesson_list"=>"","room"=>""),
-				"Чт"=>array("lesson_list"=>"","room"=>""),
-				"Пт"=>array("lesson_list"=>"","room"=>""),
-				"Сб"=>array("lesson_list"=>"","room"=>"")
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>"")
 			),
 			array( 
-				"number"=>"10",
-				"Пн"=>array("lesson_list"=>"","room"=>""),
-				"Вт"=>array("lesson_list"=>"","room"=>""),
-				"Ср"=>array("lesson_list"=>"","room"=>""),
-				"Чт"=>array("lesson_list"=>"","room"=>""),
-				"Пт"=>array("lesson_list"=>"","room"=>""),
-				"Сб"=>array("lesson_list"=>"","room"=>"")
+				10,
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>"")
 			),
 			array( 
-				"number"=>"11",
-				"Пн"=>array("lesson_list"=>"","room"=>""),
-				"Вт"=>array("lesson_list"=>"","room"=>""),
-				"Ср"=>array("lesson_list"=>"","room"=>""),
-				"Чт"=>array("lesson_list"=>"","room"=>""),
-				"Пт"=>array("lesson_list"=>"","room"=>""),
-				"Сб"=>array("lesson_list"=>"","room"=>"")
+				11,
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>"")
 			),
 			array( 
-				"number"=>"12",
-				"Пн"=>array("lesson_list"=>"","room"=>""),
-				"Вт"=>array("lesson_list"=>"","room"=>""),
-				"Ср"=>array("lesson_list"=>"","room"=>""),
-				"Чт"=>array("lesson_list"=>"","room"=>""),
-				"Пт"=>array("lesson_list"=>"","room"=>""),
-				"Сб"=>array("lesson_list"=>"","room"=>"")
+				12,
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>""),
+				array("lesson_list"=>"","room"=>"")
 			)
 		);
 	}
