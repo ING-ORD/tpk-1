@@ -60,7 +60,7 @@
 
 	<script type="text/javascript">
 		alert("ss")
-		
+		var weeks = ""; 
 		function check_day (answer,i){
 			var html;
 			alert(answer[1].number);
@@ -84,10 +84,10 @@
 
 		function check_week (answer,i){
 			var html;
-			if(answer[i].lesson.indexOf("|") != -1){
-
+			if(answer[i][1].lesson_list.indexOf("|") != -1){
+				alert("2");
 			}else{
-				html = "<tr class=\"table_ "+ i +"\"> <td class=\"cell_1\">"+ i +"</td> <td class=\"cell_2\">"+ answer[0][i].lesson_list +"</td> <td class=\"cell_3\">"+ answer[0][i].room +"</td> <td class=\"cell_4\">"+ answer[1][i].lesson_list +"</td> <td class=\"cell_5\">"+ answer[1][i].room +"</td> <td class=\"cell_6\">"+ answer[2][i].lesson_list +"</td> <td class=\"cell_7\">"+ answer[2][i].room +"</td> <td class=\"cell_8\">"+ answer[3][i].lesson_list +"</td> <td class=\"cell_9\">"+ answer[3][i].room +"</td> <td class=\"cell_10\">"+ answer[4][i].lesson_list +"</td> <td class=\"cell_11\">"+ answer[4][i].room +"</td> <td class=\"cell_12\">"+ answer[5][i].lesson_list +"</td> <td class=\"cell_13\">"+ answer[5][i].room +"</td> </tr>";
+				html = "<tr class=\"table_ "+ i +"\"> <td class=\"cell_1\">"+ answer[i][0] +"</td> <td class=\"cell_2\">"+ answer[i][1].lesson_list +"</td> <td class=\"cell_3\">"+ answer[i][1].room +"</td> <td class=\"cell_4\">"+ answer[i][2].lesson_list +"</td> <td class=\"cell_5\">"+ answer[i][2].room +"</td> <td class=\"cell_6\">"+ answer[i][3].lesson_list +"</td> <td class=\"cell_7\">"+ answer[i][3].room +"</td> <td class=\"cell_8\">"+ answer[i][4].lesson_list +"</td> <td class=\"cell_9\">"+ answer[i][4].room +"</td> <td class=\"cell_10\">"+ answer[i][5].lesson_list +"</td> <td class=\"cell_11\">"+ answer[i][5].room +"</td> <td class=\"cell_12\">"+ answer[i][6].lesson_list +"</td> <td class=\"cell_13\">"+ answer[i][6].room +"</td> </tr>";
 			}
 			return html;
 		}
@@ -107,12 +107,21 @@
 		function funcSeccess(data){
 			var answer = JSON.parse(data);
 			for (var i = 0; i < answer.length; i++) 
-			{
-				if(i==0){
-					$("#week_day").html("");
-					$("#week_day").append("<tr class=\"table_of_contents\"><th>Урок</th><th>Название предмета</th><th>Преподаватель</th><th>Кабинет</th></tr>");
+			{	
+				if($("select#week").val() != 7){
+					if(i==0){
+						$("#week_day").html("");
+						$("#week_day").append("<tr class=\"table_of_contents\"><th>Урок</th><th>Название предмета</th><th>Преподаватель</th><th>Кабинет</th></tr>");
+					}
+					$("#week_day").append( check_day( answer,i ) );
+				}else
+				{
+					if(i==0){
+						$("#week_day").html("");
+						$("#week_day").append("<tr class=\"table_1\"> <td class=\"cell_1\" rowspan=\"2\">№</td> <td class=\"cell_2\" colspan=\"2\">Понедельник</td> <td class=\"cell_3\" colspan=\"2\">Вторник</td> <td class=\"cell_4\" colspan=\"2\">Среда</td> <td class=\"cell_5\" colspan=\"2\">Четверг</td> <td class=\"cell_6\" colspan=\"2\">Пятница</td> <td class=\"cell_7\" colspan=\"2\">Суббота</td> </tr> <tr class=\"table_1\"> <td class=\"cell_1\">Предмет/<br>Преподаватель</td> <td class=\"cell_2\">Кабинет</td> <td class=\"cell_3\">Предмет/<br>Преподаватель</td> <td class=\"cell_4\">Кабинет</td> <td class=\"cell_5\">Предмет/<br>Преподаватель</td> <td class=\"cell_6\">Кабинет</td> <td class=\"cell_7\">Предмет/<br>Преподаватель</td> <td class=\"cell_8\">Кабинет</td> <td class=\"cell_9\">Предмет/<br>Преподаватель</td> <td class=\"cell_10\">Кабинет</td> <td class=\"cell_11\">Предмет/<br>Преподаватель</td> <td class=\"cell_12\">Кабинет</td> </tr>");
+					}
+					$("#week_day").append( check_week( answer,i ) );
 				}
-				$("#week_day").append( check_day( answer,i ) );
 			}
 			
 		};
@@ -120,7 +129,7 @@
 		$(document).ready(function (){
 
 			$("select.list").on("click", function(){
-
+				weeks = $("select#week").val();
 
 				if ($(this).hasClass("op-sel")){
 					if($("input.status").val() == "0")
@@ -160,6 +169,7 @@
 			});
 
 			$("select#week").on("click", function(){
+				weeks = $("select#week").val();
 				if ($(this).hasClass("op-sel")){
 					if($("input.status").val() == "0"){
 						$.ajax({
@@ -196,6 +206,7 @@
 			});
 
 			$("div.status input.status").on("click",function(){
+				weeks = $("select#week").val();
 
 				$.ajax({
 					url:"list_request.php",
