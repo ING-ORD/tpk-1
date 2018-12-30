@@ -40,111 +40,111 @@
 		$answer = array(
 			array( 
 				1,
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>"")
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>"")
 			),
 			array( 
 				2,
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>"")
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>"")
 			),
 			array( 
 				3,
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>"")
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>"")
 			),
 			array( 
 				4,
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>"")
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>"")
 			),
 			array( 
 				5,
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>"")
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>"")
 			),
 			array( 
 				6,
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>"")
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>"")
 			),
 			array( 
 				7,
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>"")
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>"")
 			),
 			array( 
 				8,
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>"")
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>"")
 			),
 			array( 
 				9,
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>"")
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>"")
 			),
 			array( 
 				10,
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>"")
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>"")
 			),
 			array( 
 				11,
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>"")
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>"")
 			),
 			array( 
 				12,
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>""),
-				array("lesson_list"=>"","room"=>"")
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>""),
+				array("lessonList"=>"","room"=>"")
 			)
 		);
 	}
@@ -177,7 +177,7 @@
 	{
 		if ($status == 0) 
 		{
-			$timetable_q = "SELECT timetable.number,timetable.day,lessons.name ,teachers.name ,rooms.name FROM timetable INNER JOIN lessons ON timetable.lesson = lessons.id INNER JOIN teachers ON timetable.teacher = teachers.id INNER JOIN rooms ON timetable.room = rooms.id WHERE (timetable.groupname = '".$group."') ORDER BY  timetable.number, timetable.day;";
+			$timetable_q = "SELECT timetable.day,timetable.number,lessons.name ,teachers.name ,rooms.name FROM timetable INNER JOIN lessons ON timetable.lesson = lessons.id INNER JOIN teachers ON timetable.teacher = teachers.id INNER JOIN rooms ON timetable.room = rooms.id WHERE (timetable.groupname = '".$group."') ORDER BY  timetable.day,timetable.number,lessons.name";
 		}else
 		{
 			$timetable_q = "SELECT timetable.number,timetable.day,lessons.name ,groups.name ,rooms.name FROM timetable INNER JOIN lessons ON timetable.lesson = lessons.id INNER JOIN groups ON timetable.groupname = groups.id INNER JOIN rooms ON timetable.room = rooms.id WHERE (timetable.groupname = '".$teacher."') ORDER BY  timetable.number, timetable.day;";
@@ -208,11 +208,13 @@
 		for ($i=0; $i < $rows ; $i++) { 
 			$row = mysqli_fetch_row($timetable);
 			for ($j=0; $j < 12 ; $j++) {
-				for ($k=1; $k < 7 ; $k++) { 
-					if($answer[$j][0] == $row[0] and ($answer[(int)$row[0]-1][$k]["lesson_list"] == "")){
-						$answer[$j][1]["lesson_list"] = $row[2];
-					}else if($answer[$j][0] == $row[0] and $answer[(int)$row[0]-1][$k]["lesson_list"] != ""){
-						$answer[$j][1] .= "|".$row[2];
+				for ($k=1; $k < 8 ; $k++) { 
+					if($answer[$j][0] == $row[1] and $k == $row[0] and ($answer[(int)$row[1]-1][$k]["lessonList"] == "")){
+						$answer[$j][$k]["lessonList"] = $row[2]."(".$row[3].")";
+						$answer[$j][$k]["room"] = $row[4];
+					}else if($answer[$j][0] == $row[1] and $k == $row[0] and  $answer[(int)$row[1]-1][$k]['lessonList'] != ""){
+						$answer[$j][$k]["lessonList"] .= "|". $row[2]."(".$row[3].")";
+						$answer[$j][$k]["room"] .= "|". $row[4];
 					}
 				} 
 			}
