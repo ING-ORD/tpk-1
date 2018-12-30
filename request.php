@@ -180,7 +180,7 @@
 			$timetable_q = "SELECT timetable.day,timetable.number,lessons.name ,teachers.name ,rooms.name FROM timetable INNER JOIN lessons ON timetable.lesson = lessons.id INNER JOIN teachers ON timetable.teacher = teachers.id INNER JOIN rooms ON timetable.room = rooms.id WHERE (timetable.groupname = '".$group."') ORDER BY  timetable.day,timetable.number,lessons.name";
 		}else
 		{
-			$timetable_q = "SELECT timetable.number,timetable.day,lessons.name ,groups.name ,rooms.name FROM timetable INNER JOIN lessons ON timetable.lesson = lessons.id INNER JOIN groups ON timetable.groupname = groups.id INNER JOIN rooms ON timetable.room = rooms.id WHERE (timetable.groupname = '".$teacher."') ORDER BY  timetable.number, timetable.day;";
+			$timetable_q = "SELECT timetable.day,timetable.number,lessons.name ,groups.name ,rooms.name FROM timetable INNER JOIN lessons ON timetable.lesson = lessons.id INNER JOIN groups ON timetable.groupname = groups.id INNER JOIN rooms ON timetable.room = rooms.id WHERE (timetable.teacher = '".$teacher."') ORDER BY   timetable.day,timetable.number;";
 		}
 	}
 
@@ -210,10 +210,10 @@
 			for ($j=0; $j < 12 ; $j++) {
 				for ($k=1; $k < 8 ; $k++) { 
 					if($answer[$j][0] == $row[1] and $k == $row[0] and ($answer[(int)$row[1]-1][$k]["lessonList"] == "")){
-						$answer[$j][$k]["lessonList"] = $row[2]."(".$row[3].")";
+						$answer[$j][$k]["lessonList"] = $row[2]."<br>(".$row[3].")";
 						$answer[$j][$k]["room"] = $row[4];
 					}else if($answer[$j][0] == $row[1] and $k == $row[0] and  $answer[(int)$row[1]-1][$k]['lessonList'] != ""){
-						$answer[$j][$k]["lessonList"] .= "|". $row[2]."(".$row[3].")";
+						$answer[$j][$k]["lessonList"] .= "|". $row[2]."<br>(".$row[3].")";
 						$answer[$j][$k]["room"] .= "|". $row[4];
 					}
 				} 

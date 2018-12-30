@@ -59,8 +59,7 @@
 	<!-- JavaScript (JQuery) -->
 
 	<script type="text/javascript">
-		alert("ss")
-		var weeks = ""; 
+		alert("ss");
 		function check_day (answer,i){
 			var html;
 			if (answer[i].lesson.indexOf("|") != -1) {
@@ -84,9 +83,38 @@
 		function check_week (answer,i){
 			var html;
 			console.log(JSON.stringify(answer))
-			if((answer[i][1].lessonList.indexOf("|") != -1)||(answer[i][2].lessonList.indexOf("|") != -1)||(answer[i][3].lessonList.indexOf("|") != -1)||(answer[i][4].lessonList.indexOf("|") != -1)||(answer[i][5].lessonList.indexOf("|") != -1)||(answer[i][6].lessonList.indexOf("|") != -1)){
+			if((answer[i][1].lessonList.indexOf("|") != -1)||(answer[i][2].lessonList.indexOf("|") != -1)||(answer[i][3].lessonList.indexOf("|") != -1)||(answer[i][4].lessonList.indexOf("|") != -1)||(answer[i][5].lessonList.indexOf("|") != -1)||(answer[i][6].lessonList.indexOf("|") != -1))
+			{
 
-				html = ""
+				var lessonList_1_1 = answer[i][1].lessonList.substring(0,answer[i][1].lessonList.indexOf("|"));
+				var lessonList_1_2 = answer[i][2].lessonList.substring(0,answer[i][2].lessonList.indexOf("|"));
+				var lessonList_1_3 = answer[i][3].lessonList.substring(0,answer[i][3].lessonList.indexOf("|"));
+				var lessonList_1_4 = answer[i][4].lessonList.substring(0,answer[i][4].lessonList.indexOf("|"));
+				var lessonList_1_5 = answer[i][5].lessonList.substring(0,answer[i][5].lessonList.indexOf("|"));
+				var lessonList_1_6 = answer[i][6].lessonList.substring(0,answer[i][6].lessonList.indexOf("|"));
+				var room_1_1 = answer[i][1].room.substring(0,answer[i][1].room.indexOf("|"));
+				var room_1_2 = answer[i][2].room.substring(0,answer[i][2].room.indexOf("|"));
+				var room_1_3 = answer[i][3].room.substring(0,answer[i][3].room.indexOf("|"));
+				var room_1_4 = answer[i][4].room.substring(0,answer[i][4].room.indexOf("|"));
+				var room_1_5 = answer[i][5].room.substring(0,answer[i][5].room.indexOf("|"));
+				var room_1_6 = answer[i][6].room.substring(0,answer[i][6].room.indexOf("|"));
+
+				var lessonList_2_1 = answer[i][1].lessonList.substring(answer[i][1].lessonList.indexOf("|")+1,answer[i][1].lessonList.length);
+				var lessonList_2_2 = answer[i][2].lessonList.substring(answer[i][2].lessonList.indexOf("|")+1,answer[i][2].lessonList.length);
+				var lessonList_2_3 = answer[i][3].lessonList.substring(answer[i][3].lessonList.indexOf("|")+1,answer[i][3].lessonList.length);
+				var lessonList_2_4 = answer[i][4].lessonList.substring(answer[i][4].lessonList.indexOf("|")+1,answer[i][4].lessonList.length);
+				var lessonList_2_5 = answer[i][5].lessonList.substring(answer[i][5].lessonList.indexOf("|")+1,answer[i][5].lessonList.length);
+				var lessonList_2_6 = answer[i][6].lessonList.substring(answer[i][6].lessonList.indexOf("|")+1,answer[i][6].lessonList.length);
+				var room_2_1 = answer[i][1].room.substring(answer[i][1].room.indexOf("|")+1,answer[i][1].room.length);
+				var room_2_2 = answer[i][2].room.substring(answer[i][2].room.indexOf("|")+1,answer[i][2].room.length);
+				var room_2_3 = answer[i][3].room.substring(answer[i][3].room.indexOf("|")+1,answer[i][3].room.length);
+				var room_2_4 = answer[i][4].room.substring(answer[i][4].room.indexOf("|")+1,answer[i][4].room.length);
+				var room_2_5 = answer[i][5].room.substring(answer[i][5].room.indexOf("|")+1,answer[i][5].room.length);
+				var room_2_6 = answer[i][6].room.substring(answer[i][6].room.indexOf("|")+1,answer[i][6].room.length);
+
+
+
+				html = "<tr class=\"table_"+i+"\"> <td class=\"cell_1\" rowspan =\"2\" >"+answer[i][0]+"</td> <td class=\"cell_2\">"+lessonList_1_1+"</td> <td class=\"cell_3\">"+room_1_1+"</td> <td class=\"cell_4\">"+lessonList_1_2+"</td> <td class=\"cell_5\">"+room_1_2+"</td> <td class=\"cell_6\">"+lessonList_1_3+"</td> <td class=\"cell_7\">"+room_1_3+"</td> <td class=\"cell_8\">"+lessonList_1_4+"</td> <td class=\"cell_9\">"+room_1_4+"</td> <td class=\"cell_10\">"+lessonList_1_5+"</td> <td class=\"cell_11\">"+room_1_5+"</td> <td class=\"cell_12\">"+lessonList_1_6+"</td> <td class=\"cell_13\">"+room_1_6+"</td> </tr> <tr class=\"table_"+i+"\"> <td class=\"cell_2\">"+lessonList_2_1+"</td> <td class=\"cell_3\">"+room_2_1+"</td> <td class=\"cell_4\">"+lessonList_2_2+"</td> <td class=\"cell_5\">"+room_2_2+"</td> <td class=\"cell_6\">"+lessonList_2_3+"</td> <td class=\"cell_7\">"+room_2_3+"</td> <td class=\"cell_8\">"+lessonList_2_4+"</td> <td class=\"cell_9\">"+room_2_4+"</td> <td class=\"cell_10\">"+lessonList_2_5+"</td> <td class=\"cell_5\">"+room_2_5+"</td> <td class=\"cell_6\">"+lessonList_2_6+"</td> <td class=\"cell_7\">"+room_2_6+"</td> </tr>"
 
 			}else{
 				html = "<tr class=\"table_ "+ i +"\"> <td class=\"cell_1\">"+ answer[i][0] +"</td> <td class=\"cell_2\">"+ answer[i][1].lessonList +"</td> <td class=\"cell_3\">"+ answer[i][1].room +"</td> <td class=\"cell_4\">"+ answer[i][2].lessonList +"</td> <td class=\"cell_5\">"+ answer[i][2].room +"</td> <td class=\"cell_6\">"+ answer[i][3].lessonList +"</td> <td class=\"cell_7\">"+ answer[i][3].room +"</td> <td class=\"cell_8\">"+ answer[i][4].lessonList +"</td> <td class=\"cell_9\">"+ answer[i][4].room +"</td> <td class=\"cell_10\">"+ answer[i][5].lessonList +"</td> <td class=\"cell_11\">"+ answer[i][5].room +"</td> <td class=\"cell_12\">"+ answer[i][6].lessonList +"</td> <td class=\"cell_13\">"+ answer[i][6].room +"</td> </tr>";
@@ -131,7 +159,6 @@
 		$(document).ready(function (){
 
 			$("select.list").on("click", function(){
-				weeks = $("select#week").val();
 
 				if ($(this).hasClass("op-sel")){
 					if($("input.status").val() == "0")
@@ -171,7 +198,7 @@
 			});
 
 			$("select#week").on("click", function(){
-				weeks = $("select#week").val();
+				
 				if ($(this).hasClass("op-sel")){
 					if($("input.status").val() == "0"){
 						$.ajax({
@@ -208,7 +235,6 @@
 			});
 
 			$("div.status input.status").on("click",function(){
-				weeks = $("select#week").val();
 
 				$.ajax({
 					url:"list_request.php",
@@ -248,7 +274,6 @@
 					});
 				}
 
-				
 			});
 		});
 	</script>
@@ -339,38 +364,38 @@
 	echo " value='7'>Неделя</option>";
 	mysqli_free_result($result_week);
 	echo "</select><br>";
-		 ?>
+?>
 	</form>
 	<hr>
 <?php 
-///Зависимость от списка "Группа" и вывод группы на экран
-// 	if($_POST["teacher"] === "0")
-// 		{
-// 			$query_teachers = "SELECT teachers.name FROM teachers WHERE (teachers.id = '".$teachers_id_num."');";
+	///Зависимость от списка "Группа" и вывод группы на экран
+	// 	if($_POST["teacher"] === "0")
+	// 		{
+	// 			$query_teachers = "SELECT teachers.name FROM teachers WHERE (teachers.id = '".$teachers_id_num."');";
 
-// 			$result_teachers = mysqli_query($link,$query_teachers) 
-// 			or die("ошибка ".mysqli_connect_error($link));
+	// 			$result_teachers = mysqli_query($link,$query_teachers) 
+	// 			or die("ошибка ".mysqli_connect_error($link));
 
-// 			$row_teachers = mysqli_fetch_row($result_teachers);
-// 			echo $row_teachers[0]."<br>";	
-// 	}else{
-// 			$query_groups = "SELECT groups.name FROM groups WHERE (groups.id = '".$groups_id."');";
+	// 			$row_teachers = mysqli_fetch_row($result_teachers);
+	// 			echo $row_teachers[0]."<br>";	
+	// 	}else{
+	// 			$query_groups = "SELECT groups.name FROM groups WHERE (groups.id = '".$groups_id."');";
 
-// 			$result_groups = mysqli_query($link,$query_groups) 
-// 			or die("ошибка ".mysqli_connect_error($link));
+	// 			$result_groups = mysqli_query($link,$query_groups) 
+	// 			or die("ошибка ".mysqli_connect_error($link));
 
-// 			$row_groups = mysqli_fetch_row($result_groups);
-// 			echo $row_groups[0]."<br>";
-// 	}	
-// ///Зависимость от списка "Дни недели" и вывод дня недели на экран
-// 			$query_week = "SELECT week.name FROM week WHERE (week.id = '".$day_id."');";
+	// 			$row_groups = mysqli_fetch_row($result_groups);
+	// 			echo $row_groups[0]."<br>";
+	// 	}	
+	// ///Зависимость от списка "Дни недели" и вывод дня недели на экран
+	// 			$query_week = "SELECT week.name FROM week WHERE (week.id = '".$day_id."');";
 
-// 			$result_week = mysqli_query($link,$query_week) 
-// 			or die("ошибка ".mysqli_connect_error($link));
+	// 			$result_week = mysqli_query($link,$query_week) 
+	// 			or die("ошибка ".mysqli_connect_error($link));
 
-// 			$row_week = mysqli_fetch_row($result_week);
-// 			echo $row_week[0];
-////Таблица(Генератор)
+	// 			$row_week = mysqli_fetch_row($result_week);
+	// 			echo $row_week[0];
+	////Таблица(Генератор)
  // 	if($_POST["teacher"] === "1")
  // 	{
 	// 	$teacher_name = "SELECT * FROM timetable WHERE (timetable.teacher = '".$teachers_id_num."'".$query_add.") ORDER BY timetable.number;";
@@ -655,79 +680,7 @@
 		</div>
 		<div class="week_day">
 			<table id="week_day">
-				<tr class="table_of_contents"><th>Урок</th><th>Название предмета</th><th>Преподаватель</th><th>Кабинет</th></tr>
-				<tr class="table_1">
-					<td class="cell_1"></td>
-					<td class="cell_2"></td>
-					<td class="cell_3"></td>
-					<td class="cell_4"></td>
-				</tr>
-				<tr class="table_2">
-					<td class="cell_1"></td>
-					<td class="cell_2"></td>
-					<td class="cell_3"></td>
-					<td class="cell_4"></td>
-				</tr>
-				<tr class="table_3">
-					<td class="cell_1"></td>
-					<td class="cell_2"></td>
-					<td class="cell_3"></td>
-					<td class="cell_4"></td>
-				</tr>
-				<tr class="table_4">
-					<td class="cell_1"></td>
-					<td class="cell_2"></td>
-					<td class="cell_3"></td>
-					<td class="cell_4"></td>
-				</tr>
-				<tr class="table_5">
-					<td class="cell_1"></td>
-					<td class="cell_2"></td>
-					<td class="cell_3"></td>
-					<td class="cell_4"></td>
-				</tr>
-				<tr class="table_6">
-					<td class="cell_1"></td>
-					<td class="cell_2"></td>
-					<td class="cell_3"></td>
-					<td class="cell_4"></td>
-				</tr>
-				<tr class="table_7">
-					<td class="cell_1"></td>
-					<td class="cell_2"></td>
-					<td class="cell_3"></td>
-					<td class="cell_4"></td>
-				</tr>
-				<tr class="table_8">
-					<td class="cell_1"></td>
-					<td class="cell_2"></td>
-					<td class="cell_3"></td>
-					<td class="cell_4"></td>
-				</tr>
-				<tr class="table_9">
-					<td class="cell_1"></td>
-					<td class="cell_2"></td>
-					<td class="cell_3"></td>
-					<td class="cell_4"></td>
-				</tr>
-				<tr class="table_10">
-					<td class="cell_1"></td>
-					<td class="cell_2"></td>
-					<td class="cell_3"></td>
-					<td class="cell_4"></td>
-				</tr>
-				<tr class="table_11">
-					<td class="cell_1"></td>
-					<td class="cell_2"></td>
-					<td class="cell_3"></td>
-					<td class="cell_4"></td>
-				</tr>
-				<tr class="table_12">
-					<td class="cell_1"></td>
-					<td class="cell_2"></td>
-					<td class="cell_3"></td>
-					<td class="cell_4"></td>
-				</tr>
+				
 			</table>
 		</div>
 	</div>
