@@ -207,8 +207,14 @@
 	}else{
 		for ($i=0; $i < $rows ; $i++) { 
 			$row = mysqli_fetch_row($timetable);
-			for ($j=0; $j < 12 ; $j++) { 
-				#code...
+			for ($j=0; $j < 12 ; $j++) {
+				for ($k=1; $k < 7 ; $k++) { 
+					if($answer[$j][0] == $row[0] and ($answer[(int)$row[0]-1][$k]["lesson_list"] == "")){
+						$answer[$j][1]["lesson_list"] = $row[2];
+					}else if($answer[$j][0] == $row[0] and $answer[(int)$row[0]-1][$k]["lesson_list"] != ""){
+						$answer[$j][1] .= "|".$row[2];
+					}
+				} 
 			}
 		}
 	}
