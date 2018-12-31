@@ -81,40 +81,37 @@
 		}
 
 		function check_week (answer,i){
-			var html;
+			var html = "";
 			console.log(JSON.stringify(answer))
 			if((answer[i][1].lessonList.indexOf("|") != -1)||(answer[i][2].lessonList.indexOf("|") != -1)||(answer[i][3].lessonList.indexOf("|") != -1)||(answer[i][4].lessonList.indexOf("|") != -1)||(answer[i][5].lessonList.indexOf("|") != -1)||(answer[i][6].lessonList.indexOf("|") != -1))
 			{
+				html += "<tr class=\"table_"+i+"\"> <td class=\"cell_1\" rowspan =\"2\" >"+answer[i][0]+"</td>"
+				for (var k = 1;k < 3; k++){
+					for (var j = 1;j < 7; j++){
+						if (k == 1) {
+							var lessonList = answer[i][j].lessonList.substring(0,answer[i][j].lessonList.indexOf("|"));
+							var room = answer[i][j].room.substring(0,answer[i][j].room.indexOf("|"));
+						}else{
+							if(j == 1){
+								html += "</tr> <tr class=\"table_"+i+"\">"	
+							}
+							
+							var lessonList = answer[i][j].lessonList.substring(answer[i][j].lessonList.indexOf("|")+1,answer[i][j].lessonList.length);
+							var room = answer[i][j].room.substring(answer[i][j].room.indexOf("|")+1,answer[i][j].room.length);
+						}
+						if(answer[i][j].lessonList.indexOf("|") != -1){
+							html += " <td>"+lessonList+"</td> <td >"+room+"</td>"
+							
+						}else{
+							if(k==1){
+								html += " <td rowspan =\"2\">"+lessonList+"</td> <td rowspan =\"2\">"+room+"</td>"
+							}
+						}
 
-				var lessonList_1_1 = answer[i][1].lessonList.substring(0,answer[i][1].lessonList.indexOf("|"));
-				var lessonList_1_2 = answer[i][2].lessonList.substring(0,answer[i][2].lessonList.indexOf("|"));
-				var lessonList_1_3 = answer[i][3].lessonList.substring(0,answer[i][3].lessonList.indexOf("|"));
-				var lessonList_1_4 = answer[i][4].lessonList.substring(0,answer[i][4].lessonList.indexOf("|"));
-				var lessonList_1_5 = answer[i][5].lessonList.substring(0,answer[i][5].lessonList.indexOf("|"));
-				var lessonList_1_6 = answer[i][6].lessonList.substring(0,answer[i][6].lessonList.indexOf("|"));
-				var room_1_1 = answer[i][1].room.substring(0,answer[i][1].room.indexOf("|"));
-				var room_1_2 = answer[i][2].room.substring(0,answer[i][2].room.indexOf("|"));
-				var room_1_3 = answer[i][3].room.substring(0,answer[i][3].room.indexOf("|"));
-				var room_1_4 = answer[i][4].room.substring(0,answer[i][4].room.indexOf("|"));
-				var room_1_5 = answer[i][5].room.substring(0,answer[i][5].room.indexOf("|"));
-				var room_1_6 = answer[i][6].room.substring(0,answer[i][6].room.indexOf("|"));
+					}
+				}		
 
-				var lessonList_2_1 = answer[i][1].lessonList.substring(answer[i][1].lessonList.indexOf("|")+1,answer[i][1].lessonList.length);
-				var lessonList_2_2 = answer[i][2].lessonList.substring(answer[i][2].lessonList.indexOf("|")+1,answer[i][2].lessonList.length);
-				var lessonList_2_3 = answer[i][3].lessonList.substring(answer[i][3].lessonList.indexOf("|")+1,answer[i][3].lessonList.length);
-				var lessonList_2_4 = answer[i][4].lessonList.substring(answer[i][4].lessonList.indexOf("|")+1,answer[i][4].lessonList.length);
-				var lessonList_2_5 = answer[i][5].lessonList.substring(answer[i][5].lessonList.indexOf("|")+1,answer[i][5].lessonList.length);
-				var lessonList_2_6 = answer[i][6].lessonList.substring(answer[i][6].lessonList.indexOf("|")+1,answer[i][6].lessonList.length);
-				var room_2_1 = answer[i][1].room.substring(answer[i][1].room.indexOf("|")+1,answer[i][1].room.length);
-				var room_2_2 = answer[i][2].room.substring(answer[i][2].room.indexOf("|")+1,answer[i][2].room.length);
-				var room_2_3 = answer[i][3].room.substring(answer[i][3].room.indexOf("|")+1,answer[i][3].room.length);
-				var room_2_4 = answer[i][4].room.substring(answer[i][4].room.indexOf("|")+1,answer[i][4].room.length);
-				var room_2_5 = answer[i][5].room.substring(answer[i][5].room.indexOf("|")+1,answer[i][5].room.length);
-				var room_2_6 = answer[i][6].room.substring(answer[i][6].room.indexOf("|")+1,answer[i][6].room.length);
-
-
-
-				html = "<tr class=\"table_"+i+"\"> <td class=\"cell_1\" rowspan =\"2\" >"+answer[i][0]+"</td> <td class=\"cell_2\">"+lessonList_1_1+"</td> <td class=\"cell_3\">"+room_1_1+"</td> <td class=\"cell_4\">"+lessonList_1_2+"</td> <td class=\"cell_5\">"+room_1_2+"</td> <td class=\"cell_6\">"+lessonList_1_3+"</td> <td class=\"cell_7\">"+room_1_3+"</td> <td class=\"cell_8\">"+lessonList_1_4+"</td> <td class=\"cell_9\">"+room_1_4+"</td> <td class=\"cell_10\">"+lessonList_1_5+"</td> <td class=\"cell_11\">"+room_1_5+"</td> <td class=\"cell_12\">"+lessonList_1_6+"</td> <td class=\"cell_13\">"+room_1_6+"</td> </tr> <tr class=\"table_"+i+"\"> <td class=\"cell_2\">"+lessonList_2_1+"</td> <td class=\"cell_3\">"+room_2_1+"</td> <td class=\"cell_4\">"+lessonList_2_2+"</td> <td class=\"cell_5\">"+room_2_2+"</td> <td class=\"cell_6\">"+lessonList_2_3+"</td> <td class=\"cell_7\">"+room_2_3+"</td> <td class=\"cell_8\">"+lessonList_2_4+"</td> <td class=\"cell_9\">"+room_2_4+"</td> <td class=\"cell_10\">"+lessonList_2_5+"</td> <td class=\"cell_5\">"+room_2_5+"</td> <td class=\"cell_6\">"+lessonList_2_6+"</td> <td class=\"cell_7\">"+room_2_6+"</td> </tr>"
+				html += "</tr>"
 
 			}else{
 				html = "<tr class=\"table_ "+ i +"\"> <td class=\"cell_1\">"+ answer[i][0] +"</td> <td class=\"cell_2\">"+ answer[i][1].lessonList +"</td> <td class=\"cell_3\">"+ answer[i][1].room +"</td> <td class=\"cell_4\">"+ answer[i][2].lessonList +"</td> <td class=\"cell_5\">"+ answer[i][2].room +"</td> <td class=\"cell_6\">"+ answer[i][3].lessonList +"</td> <td class=\"cell_7\">"+ answer[i][3].room +"</td> <td class=\"cell_8\">"+ answer[i][4].lessonList +"</td> <td class=\"cell_9\">"+ answer[i][4].room +"</td> <td class=\"cell_10\">"+ answer[i][5].lessonList +"</td> <td class=\"cell_11\">"+ answer[i][5].room +"</td> <td class=\"cell_12\">"+ answer[i][6].lessonList +"</td> <td class=\"cell_13\">"+ answer[i][6].room +"</td> </tr>";
