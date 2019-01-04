@@ -139,13 +139,21 @@
 					if(i==0){
 						$("#week_day").html("");
 						$("#week_day").append("<tr class=\"table_of_contents\"><th>Урок</th><th>Название предмета</th><th>Преподаватель</th><th>Кабинет</th></tr>");
+						if ($("input.status").val() == "1"){
+							$(".table_of_contents").children("th:nth-child(3)").html("Группа");
+						}
 					}
 					$("#week_day").append( check_day( answer,i ) );
 				}else
 				{
 					if(i==0){
 						$("#week_day").html("");
-						$("#week_day").append("<tr class=\"table_1\"> <td class=\"cell_1\" rowspan=\"2\">№</td> <td class=\"cell_2\" colspan=\"2\">Понедельник</td> <td class=\"cell_3\" colspan=\"2\">Вторник</td> <td class=\"cell_4\" colspan=\"2\">Среда</td> <td class=\"cell_5\" colspan=\"2\">Четверг</td> <td class=\"cell_6\" colspan=\"2\">Пятница</td> <td class=\"cell_7\" colspan=\"2\">Суббота</td> </tr> <tr class=\"table_1\"> <td class=\"cell_1\">Предмет/<br>Преподаватель</td> <td class=\"cell_2\">Кабинет</td> <td class=\"cell_3\">Предмет/<br>Преподаватель</td> <td class=\"cell_4\">Кабинет</td> <td class=\"cell_5\">Предмет/<br>Преподаватель</td> <td class=\"cell_6\">Кабинет</td> <td class=\"cell_7\">Предмет/<br>Преподаватель</td> <td class=\"cell_8\">Кабинет</td> <td class=\"cell_9\">Предмет/<br>Преподаватель</td> <td class=\"cell_10\">Кабинет</td> <td class=\"cell_11\">Предмет/<br>Преподаватель</td> <td class=\"cell_12\">Кабинет</td> </tr>");
+						if($("input.status").val() == "1"){
+							$("#week_day").append("<tr class=\"table_1\"> <td class=\"cell_1\" rowspan=\"2\">№</td> <td class=\"cell_2\" colspan=\"2\">Понедельник</td> <td class=\"cell_3\" colspan=\"2\">Вторник</td> <td class=\"cell_4\" colspan=\"2\">Среда</td> <td class=\"cell_5\" colspan=\"2\">Четверг</td> <td class=\"cell_6\" colspan=\"2\">Пятница</td> <td class=\"cell_7\" colspan=\"2\">Суббота</td> </tr> <tr class=\"group_teacher\"> <td class=\"cell_1\">Предмет/<br>Группа</td> <td class=\"cell_2\">Кабинет</td> <td class=\"cell_3\">Предмет/<br>Группа</td> <td class=\"cell_4\">Кабинет</td> <td class=\"cell_5\">Предмет/<br>Группа</td> <td class=\"cell_6\">Кабинет</td> <td class=\"cell_7\">Предмет/<br>Группа</td> <td class=\"cell_8\">Кабинет</td> <td class=\"cell_9\">Предмет/<br>Группа</td> <td class=\"cell_10\">Кабинет</td> <td class=\"cell_11\">Предмет/<br>Группа</td> <td class=\"cell_12\">Кабинет</td> </tr>");
+						}else{
+							$("#week_day").append("<tr class=\"table_1\"> <td class=\"cell_1\" rowspan=\"2\">№</td> <td class=\"cell_2\" colspan=\"2\">Понедельник</td> <td class=\"cell_3\" colspan=\"2\">Вторник</td> <td class=\"cell_4\" colspan=\"2\">Среда</td> <td class=\"cell_5\" colspan=\"2\">Четверг</td> <td class=\"cell_6\" colspan=\"2\">Пятница</td> <td class=\"cell_7\" colspan=\"2\">Суббота</td> </tr> <tr class=\"group_teacher\"> <td class=\"cell_1\">Предмет/<br>Преподаватель</td> <td class=\"cell_2\">Кабинет</td> <td class=\"cell_3\">Предмет/<br>Преподаватель</td> <td class=\"cell_4\">Кабинет</td> <td class=\"cell_5\">Предмет/<br>Преподаватель</td> <td class=\"cell_6\">Кабинет</td> <td class=\"cell_7\">Предмет/<br>Преподаватель</td> <td class=\"cell_8\">Кабинет</td> <td class=\"cell_9\">Предмет/<br>Преподаватель</td> <td class=\"cell_10\">Кабинет</td> <td class=\"cell_11\">Предмет/<br>Преподаватель</td> <td class=\"cell_12\">Кабинет</td> </tr>");
+						}
+
 					}
 					$("#week_day").append( check_week( answer,i ) );
 				}
@@ -256,6 +264,8 @@
 						datatype: "json",
 						success: funcSeccess
 					});
+					$("label#status").html("Преподаватель:");
+					$(".table_of_contents").children("th:nth-child(3)").html("Группа");
 				}else{
 					$("input.status").val("0");
 					$.ajax({
@@ -269,9 +279,11 @@
 						datatype: "json",
 						success: funcSeccess
 					});
+					$("label#status").html("Группа:");
+					$(".table_of_contents").children("th:nth-child(3)").html("Преподаватель");
 				}
-
 			});
+
 		});
 	</script>
 
@@ -280,6 +292,9 @@
 </head>
 <body>	
 	<h1>Расписание КЦПТ</h1>
+	<?php 
+		// include "button/button.php";
+	?>
 	<form name="ginerat"  action="" method="post">
 	<label>Статус:</label><br><br>
 	<div class="status">
@@ -288,54 +303,29 @@
 	</div>
 
 <?php 
-	///----------------------------------------------------------------------
-	// if ($_POST["teacher"] == '1') {
-		// $query_teacher = "SELECT teachers.name FROM teachers;";
 
-		// $result_teacher = mysqli_query($link,$query_teacher) 
-		// or die("ошибка ".mysqli_connect_error($link));
-		// $rows_teacher  = mysqli_num_rows($result_teacher);
-		
- 	// 	echo "<label style=\"display: inline-block; width: 85px\">Группа:</label><br>";
-		// echo "<select name='teacher' id='teacher' value = '".$teachers_id."'>";
+	$query_groups = "SELECT groups.name FROM groups;";
 
-		// for ($g = 1;$g<$rows_teacher+1;++$g){
-		// 	$row_teacher = mysqli_fetch_row($result_teacher);
+	$result_groups = mysqli_query($link,$query_groups) 
+	or die("ошибка ".mysqli_connect_error($link));
 
-		// 	for ($l = 0;$l < 1;++$l){
-		// 		echo "<option value = \"".$g."\">";
-		// 		echo "<a href =\"#\">".$row_teacher[$l]."</a>";
-		// 	}
-		// 	echo "</option>";
-		// }
-		// mysqli_free_result($result_teacher);
-		// echo "</select><br><br>";
+	
 
-	// } else {
-	
-		$query_groups = "SELECT groups.name FROM groups;";
-	
-		$result_groups = mysqli_query($link,$query_groups) 
-		or die("ошибка ".mysqli_connect_error($link));
-	
-		
-	
-		$rows_groups  = mysqli_num_rows($result_groups);
-	 	echo "<label id=\"group_l\" style=\"display: inline-block; width: 85px\">Группа:</label><br>";
-		echo "<select name='groups' class= 'list' id='groups'>";
-	
-		for ($g = 1;$g<$rows_groups+1;++$g){
-			$row_groups = mysqli_fetch_row($result_groups);
-			echo "<option ";
-			if ($g == 1){echo "selected";}
-			echo " value = \"".$g."\">";
-			echo "<a href =\"#\">".$row_groups[0]."</a>";
-			echo "</option>";
-		}
-		mysqli_free_result($result_groups);
-		echo "</select><br><br>";
-	// }
-	///----------------------------------------------------------------
+	$rows_groups  = mysqli_num_rows($result_groups);
+ 	echo "<label id=\"status\" style=\"display: inline-block; width: 85px\">Группа:</label><br>";
+	echo "<select name='groups' class= 'list' id='groups'>";
+
+	for ($g = 1;$g<$rows_groups+1;++$g){
+		$row_groups = mysqli_fetch_row($result_groups);
+		echo "<option ";
+		if ($g == 1){echo "selected";}
+		echo " value = \"".$g."\">";
+		echo "<a href =\"#\">".$row_groups[0]."</a>";
+		echo "</option>";
+	}
+	mysqli_free_result($result_groups);
+	echo "</select><br><br>";
+
 
 	$query_week = "SELECT week.name FROM week;";
 
@@ -347,18 +337,9 @@
 	echo "<select name='week' id='week' value = '".$day_id."'>";
 	for ($g = 1;$g<$rows_week+1;++$g){
 		$row_week = mysqli_fetch_row($result_week);
-
-		for ($l = 0;$l < 1;++$l){
-		echo "<option ";
-		if ($_POST["week"] == $g){echo "selected='".$_POST["week"]."'";}
-		echo " value = \"".$g."\">";
-		echo "<a href =\"#\">".$row_week[$l]."</a>";
-		}
-		echo "</option>";
+		echo "<option value = \"".$g."\"><a href =\"#\">".$row_week[0]."</a></option>";
 	}
-	echo "<option ";
-	if ($_POST["week"] == '7'){echo "selected='".$_POST["week"]."'";}
-	echo " value='7'>Неделя</option>";
+	echo "<option value='7'>Неделя</option>";
 	mysqli_free_result($result_week);
 	echo "</select><br>";
 ?>
