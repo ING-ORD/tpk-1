@@ -52,6 +52,7 @@
 <html lang="ru">
 <head>
 	<meta charset="UTF-8">
+	<meta http-equiv="Cache-Control" content="no-cache">
 	<title>Расписание КЦПТ</title>
 	<link rel="stylesheet" href="Style.css">
 	<script type="text/javascript" src="jquery-3.3.1.min.js"></script>
@@ -188,6 +189,10 @@
 		};
 
 		$(document).ready(function (){
+
+			$("but-alarm_text").on("click", function(){
+
+			})
 
 			$("select.list").on("click", function(){
 
@@ -328,6 +333,10 @@
 	<div class="status">
 		<input type="checkbox" class="status" value = "0" >
 		<div><span class="slide"></span></div>
+	</div>
+	<div class="but-alarm">
+		<div class="but-alarm_text">Звонки</div>
+		<div class="but-alarm_cont"><table class="content"><tr><th>Понеденельник-<br>Пятница</th><th>Суббота</th></tr></table></div>
 	</div>
 
 <?php 

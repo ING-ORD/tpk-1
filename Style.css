@@ -14,75 +14,10 @@ body
 	font-family: sans-serif;
 	background: #f3f3f3;
 }
-.checkbox-btn
-{  
-	transform: translate(1%,-50%);
-	width: 180px;
-	height: 30px;
-}
-.checkbox-btn input
+div.but-alarm_text
 {
-	position: relative;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 110%;
-	display: block;
+	border: 2px solid black;
+	width: 100px;
+	text-align: center;
 	cursor: pointer;
-	opacity: 0;
-	z-index: 1;
-}
-.checkbox-btn div
-{
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	border: 4px solid #000;
-	border-radius: 4px;
-	overflow:  hidden;
-}
-.checkbox-btn div .slide
-{
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 40px;
-	height: 30px;
-	background: #000;
-	transition: 0.5s;
-}
-.checkbox-btn input:checked + div .slide
-{
-	transform: translateX(140px);
-
-}
-.checkbox-btn .slide:before
-{
-	content: 'Преподаватель';
-	position: absolute;
-	top: 0;
-	left: -140px;
-	text-align: center;
-	width: 140px;
-	height: 100%;
-	line-height: 30px;
-	background: #00da00;
-	font-weight: bold;
-	color: #fff;
-}
-.checkbox-btn .slide:after
-{
-	content: 'Студент';
-	position: absolute;
-	top: 0;
-	right: -140px;
-	text-align: center;
-	width: 140px;
-	height: 100%;
-	line-height: 30px;
-	background: #ff002d;
-	font-weight: bold;
-	color: #fff;
 }
