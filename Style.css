@@ -1,6 +1,5 @@
 table
 {	
-	margin-left: 5px;
 	border-collapse: collapse;
 }
 td,th
@@ -20,4 +19,25 @@ div.but-alarm_text
 	width: 100px;
 	text-align: center;
 	cursor: pointer;
+}
+.but-alarm_cont
+{
+	background: #fff;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%); 
+}
+
+div.blyr
+{
+	background: rgba(0,0,0,.7);
+	position: absolute;
+	height:100vh;
+	width: 100%;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	top: 0;
+
 }

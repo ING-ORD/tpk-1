@@ -325,9 +325,6 @@
 </head>
 <body>	
 	<h1>Расписание КЦПТ</h1>
-	<?php 
-		// include "button/button.php";
-	?>
 	<form name="ginerat"  action="" method="post">
 	<label>Статус:</label><br><br>
 	<div class="status">
@@ -336,7 +333,18 @@
 	</div>
 	<div class="but-alarm">
 		<div class="but-alarm_text">Звонки</div>
-		<div class="but-alarm_cont"><table class="content"><tr><th>Понеденельник-<br>Пятница</th><th>Суббота</th></tr></table></div>
+		<div style="display: none;" class="blyr"></div>
+		<div style="display: none;" class="but-alarm_cont">
+			
+			<table class="content"><tr><th>Понеденельник-<br>Пятница</th><th>Суббота</th></tr>
+			<?php 
+				for ($i=0; $i < 12; $i++) { ?>
+				<script>
+					$(".but-alarm_cont table.content").append("<tr><td>"+ alarm_TO[<?php echo ($i); ?>]+ "-" + alarm_DO[<?php echo ($i); ?>] + "</td><td>"+ alarmS_TO[<?php echo ($i); ?>]+ "-" + alarmS_DO[<?php echo ($i); ?>] +"</td></tr>");
+				</script>
+			<?php } ?>
+			</table>
+		</div>
 	</div>
 
 <?php 
@@ -411,8 +419,8 @@
 	// 			$row_week = mysqli_fetch_row($result_week);
 	// 			echo $row_week[0];
 	////Таблица(Генератор)
- // 	if($_POST["teacher"] === "1")
- // 	{
+ 	// 	if($_POST["teacher"] === "1")
+ 	// 	{
 	// 	$teacher_name = "SELECT * FROM timetable WHERE (timetable.teacher = '".$teachers_id_num."'".$query_add.") ORDER BY timetable.number;";
 	// 	$teacher = mysqli_query($link, $teacher_name)
 	// 	or die("ошибка2 ".mysqli_connect_error($link));
