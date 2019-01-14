@@ -97,6 +97,10 @@
 						if (k == 1) {
 							var lessonList = answer[i][j].lessonList.substring(0,answer[i][j].lessonList.indexOf("|"));
 							var room = answer[i][j].room.substring(0,answer[i][j].room.indexOf("|"));
+							if (lessonList == ""){
+								var lessonList = answer[i][j].lessonList
+								var room = answer[i][j].room
+							}
 						}else{
 							if(j == 1){
 								html += "</tr> <tr class=\"table_"+i+"\">"	
@@ -189,11 +193,21 @@
 		};
 
 		$(document).ready(function (){
+			//ЛОГИКА ДЛЯ КНОПКИ ЗВОНКИ
 
-			$("but-alarm_text").on("click", function(){
-
+			$(".but-alarm_text").on("click", function(){
+				$(".popap").css({'display':'block'})
 			})
 
+			$(".blyr").on("click", function(){
+				$(".popap").css({'display':'none'})
+			})
+
+			//КОНЕЦ ЛОГИКИ ДЛЯ КНОПКИ ЗВОНКИ
+			//
+			//
+			//ЛОГИКА ДЛЯ КНОПКИ СТУДЕНТ/ПРЕПОДАВАТЕЛЬ
+			
 			$("select.list").on("click", function(){
 
 				if ($(this).hasClass("op-sel")){
@@ -233,6 +247,9 @@
 				}
 			});
 
+
+			//ЛОГИКА ДЛЯ МЕНЮ С ДНЯМИ НЕДЕЛИ
+
 			$("select#week").on("click", function(){
 				
 				if ($(this).hasClass("op-sel")){
@@ -269,6 +286,9 @@
 					$(this).addClass("op-sel");
 				}
 			});
+
+
+			//ЛОГИКА ДЛЯ МЕНЮ С ГРУППАМИ/
 
 			$("div.status input.status").on("click",function(){
 
@@ -333,18 +353,23 @@
 	</div>
 	<div class="but-alarm">
 		<div class="but-alarm_text">Звонки</div>
-		<div style="display: none;" class="blyr"></div>
-		<div style="display: none;" class="but-alarm_cont">
-			
-			<table class="content"><tr><th>Понеденельник-<br>Пятница</th><th>Суббота</th></tr>
-			<?php 
-				for ($i=0; $i < 12; $i++) { ?>
-				<script>
-					$(".but-alarm_cont table.content").append("<tr><td>"+ alarm_TO[<?php echo ($i); ?>]+ "-" + alarm_DO[<?php echo ($i); ?>] + "</td><td>"+ alarmS_TO[<?php echo ($i); ?>]+ "-" + alarmS_DO[<?php echo ($i); ?>] +"</td></tr>");
-				</script>
-			<?php } ?>
-			</table>
+		<div style="display: none;" class="popap">
+			<div class="blyr"></div>
+			<div class="but-alarm_cont">
+				
+				<table class="content"><tr><th>Понеденельник-<br>Пятница</th><th>Суббота</th></tr>
+				<?php 
+					for ($i=0; $i < 12; $i++) { ?>
+					<script>
+						$(".but-alarm_cont table.content").append("<tr><td>"+ alarm_TO[<?php echo ($i); ?>]+ "-" + alarm_DO[<?php echo ($i); ?>] + "</td><td>"+ alarmS_TO[<?php echo ($i); ?>]+ "-" + alarmS_DO[<?php echo ($i); ?>] +"</td></tr>");
+					</script>
+				<?php } ?>
+				</table>
+			</div>
 		</div>
+	</div>
+	<div class="change">
+		<input type="checkbox" class="chenge">
 	</div>
 
 <?php 
