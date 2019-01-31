@@ -1,11 +1,45 @@
+*{
+	margin: 0;
+	padding:0;
+}
 table
 {	
-	border-collapse: collapse;
+	border-collapse: collapse;	
 }
 td,th
 {
 	border: 1px solid #333;
 }
+
+
+
+
+table#week_day{
+	width: 90%;
+	margin:auto;
+}
+tr.table_of_contents{
+	height:40px;
+}
+tr.table_of_contents th:nth-child(1) ,
+tr.table_of_contents th:nth-child(4){
+	width: 40px;
+}
+table#week_day tr td{
+	text-align: center;
+	padding:0.25em;
+    
+}
+form{
+    display: grid;
+    grid-template-rows: 6em;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+.but-alarm{
+    grid-column: 5/6;
+    grid-row: 1/2;
+}
+
 body
 {
 	margin: 0;

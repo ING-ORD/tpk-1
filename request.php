@@ -8,6 +8,41 @@
 ///  
 ///==================================================================================================================================================================
 
+function addChangeGroupDay(array $answer,array $change_bd, $i){ #$answer - основное расписание, $change_bd - изменения которые дополнят БД, $i - счетчик длины(каждый раз меняется)
+	if($change_bd[$i][1] == "Замена"){
+		$answer[((integer)$change_bd[$i][0])-1]["lesson"] = $change_bd[$i][2];
+		$answer[((integer)$change_bd[$i][0])-1]["list"] = $change_bd[$i][3];
+		$answer[((integer)$change_bd[$i][0])-1]["room"] = $change_bd[$i][4];
+	}else if ($change_bd[$i][1] == "Будет"){
+		$answer[((integer)$change_bd[$i][0])-1]["lesson"] = $change_bd[$i][2];
+		$answer[((integer)$change_bd[$i][0])-1]["list"] = $change_bd[$i][3];
+		$answer[((integer)$change_bd[$i][0])-1]["room"] = $change_bd[$i][4];
+	}else if ($change_bd[$i][1] == "Отмена"){
+		$answer[((integer)$change_bd[$i][0])-1]["lesson"] = "";
+		$answer[((integer)$change_bd[$i][0])-1]["list"] = "";
+		$answer[((integer)$change_bd[$i][0])-1]["room"] = "";
+	}else if ($change_bd[$i][1] == "Замена преподавателя"){
+		$answer[((integer)$change_bd[$i][0])-1]["list"] = $change_bd[$i][3];
+	}
+	return $answer;
+}
+
+function addChangeGroupWeek(array $answer,array $change_bd, $i){
+	if($change_bd[$i][1] == "Замена"){
+		$answer[((integer)$change_bd[$i][0])-1][(integer)$change_bd[$i][5]]["lessonList"] = $change_bd[$i][2]."(".$change_bd[$i][3].")";
+		$answer[((integer)$change_bd[$i][0])-1][(integer)$change_bd[$i][5]]["room"] = $change_bd[$i][4];
+	}else if ($change_bd[$i][1] == "Будет"){
+		$answer[((integer)$change_bd[$i][0])-1][(integer)$change_bd[$i][5]]["lessonList"] = $change_bd[$i][2]."(".$change_bd[$i][3].")";
+		$answer[((integer)$change_bd[$i][0])-1][(integer)$change_bd[$i][5]]["room"] = $change_bd[$i][4];
+	}else if ($change_bd[$i][1] == "Отмена"){
+		$answer[((integer)$change_bd[$i][0])-1][(integer)$change_bd[$i][5]]["lessonList"] = "";
+		$answer[((integer)$change_bd[$i][0])-1][(integer)$change_bd[$i][5]]["room"] = "";
+	}else if ($change_bd[$i][1] == "Замена преподавателя"){
+		$answer[((integer)$change_bd[$i][0])-1][(integer)$change_bd[$i][5]]["lessonList"] = $change_bd[$i][3]."(".$change_bd[$i][4].")";
+	}
+	return $answer;
+}
+
 ///==================================================================================================================================================================
 ///
 ///  Получене данных
@@ -15,6 +50,7 @@
 ///==================================================================================================================================================================
 
 	$status = $_POST["status"];
+	$change = $_POST["change"];
 	if ($status == 0){
 		$group = $_POST["group"];
 	}else{
@@ -148,6 +184,13 @@
 			)
 		);
 	}
+	$answer_add;
+	$change_bd = array(
+		array("1","Замена","Мой предмет_Замена","Я","312","1"),
+		array("11","Будет","Мой предмет_Будет","Я","415","2"),
+		array("3","Отмена","Предмета не будет","Я","","3"),
+		array("2","Замена преподавателя","Мой предмет_с другим преподавателем","Я","221","5")
+	);
 
 
 ///==================================================================================================================================================================
@@ -221,7 +264,25 @@
 		}
 	}
 
-
+	if ($change == 1) {
+		if($week != 7){
+			if ($status == 0) {
+				for ($i=0; $i < count($change_bd); $i++) { 
+					$answer = addChangeGroupDay($answer, $change_bd, $i);
+				}
+			}else{
+				#code...
+			}
+		}else{
+			if ($status == 0) {
+				for ($i=0; $i < count($change_bd) ; $i++) { 
+					$answer = addChangeGroupWeek($answer, $change_bd, $i);
+				}
+			}else{
+				#code...
+			}
+		}
+	}
 	mysqli_close($link);
 
 ///======================================================================================
@@ -229,7 +290,6 @@
 ///  Отправка массива
 ///  
 ///======================================================================================
-
 	echo json_encode($answer);
 
  ?>
