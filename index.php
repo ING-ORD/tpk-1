@@ -395,7 +395,7 @@
 
 
             $rows_groups  = mysqli_num_rows($result_groups);
-            echo "<div><label id=\"status\" style=\"display: inline-block; width: 85px\">Группа:</label>";
+            echo "<div class=\"list_form\"><label id=\"status\" style=\"display: inline-block; width: 85px\">Группа:</label>";
             echo "<select name='groups' class= 'list' id='groups'>";
 
             for ($g = 1;$g<$rows_groups+1;++$g){
@@ -416,7 +416,7 @@
             or die("ошибка ".mysqli_connect_error($link));
             $rows_week  = mysqli_num_rows($result_week);
 
-            echo "<div><label style=\"display: inline-block; width: 125px\">День недели:</label>";
+            echo "<div class=\"week_form\"><label style=\"display: inline-block; width: 125px\">День недели:</label>";
             echo "<select name='week' id='week' value = '".$day_id."'>";
             for ($g = 1;$g<$rows_week+1;++$g){
                 $row_week = mysqli_fetch_row($result_week);
