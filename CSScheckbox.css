@@ -1,0 +1,74 @@
+label
+{
+    position: relative;
+}
+label input[type="checkbox"]
+{
+    opacity: 0;
+    display: none;
+}
+.check
+{
+    display: block;
+    position: absolute;
+    width: 60px;
+    height: 30px;
+    border: 2px solid #0563af;
+    border-radius: 60px;
+    transition: 0.5s;
+}
+label input[type="checkbox"]:checked ~ .check
+{
+    border: 2px solid #0563af;
+}
+.check::before
+{
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border: 2px solid #fff;
+    box-sizing: border-box;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 1px #0563af;
+    transition: 0.5s;
+    background: #0563af;
+}
+label input[type="checkbox"]:checked ~ .check::before
+{
+    transform: translateX(30px);
+}
+span.text
+{
+    display: block;
+    position: relative;
+   line-height: 1em;
+    left: 65px;
+    width: 100px;
+    font-size: 30px;
+    transition: 0.5s;
+    font-weight: bold;
+    color: #000;
+}
+.text.on
+{
+    position: relative;
+    transform: translateY(-30px);
+    opacity: 0;
+}
+.text.off
+{
+    position: relative;
+    transform: translateY(-30px);
+    opacity: 1;
+}
+label input[type="checkbox"]:checked ~ .text.on
+{
+    transform: translateY(0px);
+    opacity: 1;  
+}
+label input[type="checkbox"]:checked ~ .text.off
+{
+    transform: translateY(0px);
+    opacity: 0;  
+}

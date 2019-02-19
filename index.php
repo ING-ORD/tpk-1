@@ -11,6 +11,8 @@
 	<meta http-equiv="Cache-Control" content="no-cache">
 	<title>Расписание КЦПТ</title>
 	<link rel="stylesheet" href="Style.css">
+	<link rel="stylesheet" href="CSScheckbox.css">
+	<link rel="stylesheet" href="CSSselectbox.css">
 	<script type="text/javascript" src="jquery-3.3.1.min.js"></script>
 
 	<!-- JavaScript (JQuery) -->
@@ -22,6 +24,15 @@
 			alarmS_DO = ["9:00","9:45","10:35","11:20","12:35","13:20","14:15","15:00","15:55","16:40","17:30","18:15"]
 
 		alert("ss");
+
+		function getWeekDay(date) {
+		    date = date || new Date();
+		    var days = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+		    var day = date.getDay();
+
+		    return days[day];
+		}
+
 		function check_day (answer,i){
 			var html;
 			if (answer[i].lesson.indexOf("|") != -1) {
@@ -213,93 +224,82 @@
 				}
 			})
 
-			//ЛОГИКА ДЛЯ КНОПКИ СТУДЕНТ/ПРЕПОДАВАТЕЛЬ
+			//ЛОГИКА ДЛЯ СПИСКА СТУДЕНТ/ПРЕПОДАВАТЕЛЬ
 			
 			$("select.list").on("click", function(){
 
-				if ($(this).hasClass("op-sel")){
-					if($("input.status").val() == "0")
-					{
-						$.ajax({
-							url:"request.php",
-							type:"POST",
-							data: { 
-								change: $("input.change").val(),
-								status: $("input.status").val(),
-								group: $("select.list").val(),
-								week: $("select#week").val()
-							} ,
-							datatype: "json",
-							success: funcSeccess
-						});
-					}else
-					{
-						$.ajax({
-							url:"request.php",
-							type:"POST",
-							data: { 
-								change: $("input.change").val(),
-								status: $("input.status").val(),
-								teacher: $("select.list").val(),
-								week: $("select#week").val()
-							} ,
-							datatype: "json",
-							success: funcSeccess
-						});
-					}
-					$("select.list").removeClass("open");
-					$(this).removeClass("op-sel");
-				} 
-				else 
+				if($("input.status").val() == "0")
 				{
-					$(this).addClass("op-sel");
+					$.ajax({
+						url:"request.php",
+						type:"POST",
+						data: { 
+							change: $("input.change").val(),
+							status: $("input.status").val(),
+							group: $("select.list").val(),
+							week: $("select#week").val()
+						} ,
+						datatype: "json",
+						success: funcSeccess
+					});
+				}else
+				{
+					$.ajax({
+						url:"request.php",
+						type:"POST",
+						data: { 
+							change: $("input.change").val(),
+							status: $("input.status").val(),
+							teacher: $("select.list").val(),
+							week: $("select#week").val()
+						} ,
+						datatype: "json",
+						success: funcSeccess
+					});
 				}
+				$("select.list").removeClass("open");
+				$(this).removeClass("op-sel");
+				
 			});
-
 
 			//ЛОГИКА ДЛЯ МЕНЮ С ДНЯМИ НЕДЕЛИ
 
 			$("select#week").on("click", function(){
-				
-				if ($(this).hasClass("op-sel")){
-					if($("input.status").val() == "0"){
-						$.ajax({
-							url:"request.php",
-							type:"POST",
-							data: { 
-								change: $("input.change").val(),
-								status: $("input.status").val(),
-								group: $("select.list").val(),
-								week: $("select#week").val()
-							} ,
-							datatype: "json",
-							success: funcSeccess
-						});
-					}else{
-						$.ajax({
-							url:"request.php",
-							type:"POST",
-							data: { 
-								change: $("input.change").val(),
-								status: $("input.status").val(),
-								teacher: $("select.list").val(),
-								week: $("select#week").val()
-							} ,
-							datatype: "json",
-							success: funcSeccess
-						});
-					}
-					$("select[name='groups']").removeClass("open");
-					$(this).removeClass("op-sel");
-				} 
-				else 
-				{
-					$(this).addClass("op-sel");
+			
+				if($("input.status").val() == "0"){
+					$.ajax({
+						url:"request.php",
+						type:"POST",
+						data: { 
+							change: $("input.change").val(),
+							status: $("input.status").val(),
+							group: $("select.list").val(),
+							week: $("select#week").val()
+						} ,
+						datatype: "json",
+						success: funcSeccess
+					});
+				}else{
+					$.ajax({
+						url:"request.php",
+						type:"POST",
+						data: { 
+							change: $("input.change").val(),
+							status: $("input.status").val(),
+							teacher: $("select.list").val(),
+							week: $("select#week").val()
+						} ,
+						datatype: "json",
+						success: funcSeccess
+					});
 				}
+				$("select[name='groups']").removeClass("open");
+				$(this).removeClass("op-sel");
+				
 			});
 
 
-			//ЛОГИКА ДЛЯ МЕНЮ С ГРУППАМИ/
+			//ЛОГИКА ДЛЯ КНОПКИ ГРУППА/ПРЕПОДАВАТЕЛЬ
 
 			$("div.status input.status").on("click",function(){
 
@@ -312,7 +312,6 @@
 					datatype:"json",
 					success: funcList
 				});
-
 				if ($("input.status").val() == "0") {
 					$("input.status").val("1");
 					$.ajax({
@@ -327,7 +326,7 @@
 						datatype: "json",
 						success: funcSeccess
 					});
-					$("label#status").html("Преподаватель:");
+					$("label#status").html("Преподаватель");
 					$(".table_of_contents").children("th:nth-child(3)").html("Группа");
 				}else{
 					$("input.status").val("0");
@@ -343,7 +342,7 @@
 						datatype: "json",
 						success: funcSeccess
 					});
-					$("label#status").html("Группа:");
+					$("label#status").html("Группа");
 					$(".table_of_contents").children("th:nth-child(3)").html("Преподаватель");
 				}
 			});
@@ -360,9 +359,15 @@
 	<h1>Расписание КЦПТ</h1>
 	<form name="ginerat"  action="" method="post">
         <div class="status">
-            <input type="checkbox" class="status" value = "0" >
-            <div><span class="slide">Статус</span></div>
+        	<label for="status">Статус</label>
+            <label name="status">
+				<input type="checkbox" class="status" name="" value="0">
+				<span class="check"></span>
+				<span class="text on">Преподаватель</span>
+				<span class="text off">Студент</span>
+			</label>
         </div>
+        <div class="time_day"><script>$(".time_day").html(getWeekDay())</script></div>
         <div class="but-alarm">
             <div class="but-alarm_text">Звонки</div>
             <div style="display: none;" class="popap">
@@ -380,10 +385,18 @@
                 </div>
             </div>
         </div>
-        <div class="change">
-            <input type="checkbox" class="change" value="0">
-            <div><span class="slide_change">Изменения</span></div>
+        <div class="btn-change">
+        	<a href="https://docs.google.com/file/d/0Bzp0m-6aOGdLZVFwcHdUcElLY2c/preview" target="_blank">Изменения</a>
         </div>
+        <!-- <div class="change">
+        	<label for="change">Изменения</label>
+            <label name="change">
+				<input type="checkbox" class="change" name="" value="0">
+				<span class="check"></span>
+				<span class="text on">С</span>
+				<span class="text off">Без</span>
+			</label>
+        </div> -->
 
         <?php 
 
@@ -395,8 +408,8 @@
 
 
             $rows_groups  = mysqli_num_rows($result_groups);
-            echo "<div class=\"list_form\"><label id=\"status\" style=\"display: inline-block; width: 85px\">Группа:</label>";
-            echo "<select name='groups' class= 'list' id='groups'>";
+            echo "<div class=\"list_form\"><label id=\"status\" style=\"display: inline-block; width: 85px\">Группа</label>";
+            echo "<select name='groups' class= 'list box' id='groups'>";
 
             for ($g = 1;$g<$rows_groups+1;++$g){
                 $row_groups = mysqli_fetch_row($result_groups);
@@ -416,8 +429,8 @@
             or die("ошибка ".mysqli_connect_error($link));
             $rows_week  = mysqli_num_rows($result_week);
 
-            echo "<div class=\"week_form\"><label style=\"display: inline-block; width: 125px\">День недели:</label>";
-            echo "<select name='week' id='week' value = '".$day_id."'>";
+            echo "<div class=\"week_form\"><label style=\"display: inline-block; width: 125px\">День недели</label>";
+            echo "<select name='week' id='week' class='box' value = '".$day_id."'>";
             for ($g = 1;$g<$rows_week+1;++$g){
                 $row_week = mysqli_fetch_row($result_week);
                 echo "<option value = \"".$g."\"><a href =\"#\">".$row_week[0]."</a></option>";
