@@ -65,7 +65,13 @@ form{
 .week_form{
     grid-column: 8/13;
     grid-row: 3/5;
+    grid-template-rows: 6em;
 }
+.status{
+    grid-column: 2/3;
+    grid-row: 1/2;
+}
+
 .but-alarm{
     grid-column: 5/7;
     grid-row: 3/4;

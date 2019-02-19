@@ -380,7 +380,8 @@
                             <script>
                                 $(".but-alarm_cont table.content").append("<tr><td>"+ alarm_TO[<?php echo ($i); ?>]+ "-" + alarm_DO[<?php echo ($i); ?>] + "</td><td>"+ alarmS_TO[<?php echo ($i); ?>]+ "-" + alarmS_DO[<?php echo ($i); ?>] +"</td></tr>");
                             </script>
-                        <?php } ?>
+                            <?php } 
+                        ?>
                     </table>
                 </div>
             </div>
