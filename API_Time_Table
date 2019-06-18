@@ -1,0 +1,263 @@
+<?php  
+///==================================================================================================================================================================
+///		ОГЛАВЛЕНИЕ:
+///  	
+///  	1)Получене данных
+///		2)Генератор{Выборка элементов таблицы в массив}
+///		3)Отправка массива
+///  
+///==================================================================================================================================================================
+
+// function addChangeGroupDay(array $answer,array $change_bd, $i){ #$answer - основное расписание, $change_bd - изменения которые дополнят БД, $i - счетчик длины(каждый раз меняется)
+// 	if($change_bd[$i][1] == "Замена"){
+// 		$answer[((integer)$change_bd[$i][0])-1]["lesson"] = $change_bd[$i][2];
+// 		$answer[((integer)$change_bd[$i][0])-1]["list"] = $change_bd[$i][3];
+// 		$answer[((integer)$change_bd[$i][0])-1]["room"] = $change_bd[$i][4];
+// 	}else if ($change_bd[$i][1] == "Будет"){
+// 		$answer[((integer)$change_bd[$i][0])-1]["lesson"] = $change_bd[$i][2];
+// 		$answer[((integer)$change_bd[$i][0])-1]["list"] = $change_bd[$i][3];
+// 		$answer[((integer)$change_bd[$i][0])-1]["room"] = $change_bd[$i][4];
+// 	}else if ($change_bd[$i][1] == "Отмена"){
+// 		$answer[((integer)$change_bd[$i][0])-1]["lesson"] = "";
+// 		$answer[((integer)$change_bd[$i][0])-1]["list"] = "";
+// 		$answer[((integer)$change_bd[$i][0])-1]["room"] = "";
+// 	}else if ($change_bd[$i][1] == "Замена преподавателя"){
+// 		$answer[((integer)$change_bd[$i][0])-1]["list"] = $change_bd[$i][3];
+// 	}
+// 	return $answer;
+// }
+
+// function addChangeGroupWeek(array $answer,array $change_bd, $i){
+// 	if($change_bd[$i][1] == "Замена"){
+// 		$answer[((integer)$change_bd[$i][0])-1][(integer)$change_bd[$i][5]]["lessonList"] = $change_bd[$i][2]."(".$change_bd[$i][3].")";
+// 		$answer[((integer)$change_bd[$i][0])-1][(integer)$change_bd[$i][5]]["room"] = $change_bd[$i][4];
+// 	}else if ($change_bd[$i][1] == "Будет"){
+// 		$answer[((integer)$change_bd[$i][0])-1][(integer)$change_bd[$i][5]]["lessonList"] = $change_bd[$i][2]."(".$change_bd[$i][3].")";
+// 		$answer[((integer)$change_bd[$i][0])-1][(integer)$change_bd[$i][5]]["room"] = $change_bd[$i][4];
+// 	}else if ($change_bd[$i][1] == "Отмена"){
+// 		$answer[((integer)$change_bd[$i][0])-1][(integer)$change_bd[$i][5]]["lessonList"] = "";
+// 		$answer[((integer)$change_bd[$i][0])-1][(integer)$change_bd[$i][5]]["room"] = "";
+// 	}else if ($change_bd[$i][1] == "Замена преподавателя"){
+// 		$answer[((integer)$change_bd[$i][0])-1][(integer)$change_bd[$i][5]]["lessonList"] = $change_bd[$i][3]."(".$change_bd[$i][4].")";
+// 	}
+// 	return $answer;
+// }
+
+///==================================================================================================================================================================
+///
+///  Получене данных
+///  
+///==================================================================================================================================================================
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		$answer = array(
+			"1"=>array(
+				"1"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"2"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"3"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"4"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"5"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"6"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"7"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"8"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"9"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"10"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"11"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"12"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""))
+			),
+			"2"=>array(
+				"1"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"2"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"3"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"4"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"5"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"6"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"7"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"8"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"9"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"10"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"11"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"12"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""))
+			),
+			"3"=>array(
+				"1"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"2"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"3"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"4"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"5"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"6"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"7"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"8"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"9"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"10"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"11"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"12"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""))
+			),
+			"4"=>array(
+				"1"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"2"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"3"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"4"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"5"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"6"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"7"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"8"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"9"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"10"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"11"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"12"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""))
+			),
+			"5"=>array(
+				"1"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"2"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"3"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"4"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"5"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"6"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"7"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"8"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"9"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"10"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"11"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"12"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""))
+			),
+			"6"=>array(
+				"1"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"2"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"3"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"4"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"5"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"6"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"7"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"8"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"9"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"10"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"11"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>"")),
+				"12"=>array("1"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""),"2"=>array("Name_Lessons"=>"","Who_Is_Who"=>"","Room"=>"","Sungroup"=>""))
+			)
+		);
+
+///==================================================================================================================================================================
+///
+///  Основной гинератор
+///  
+///==================================================================================================================================================================
+
+	$dbHost = 'localhost'; 
+	$dbUser = 'root'; 
+	$dbPass = ''; 
+	$dbName = 'timetable'; 
+
+	$link = mysqli_connect($dbHost,$dbUser,$dbPass,$dbName) or die ("ошибка".mysqli_connect_error($link));
+
+
+	$timetable_q = "SELECT timetable.day, timetable.number,timetable.subgroup,lessons.name ,teachers.name ,rooms.name FROM timetable INNER JOIN lessons ON timetable.lesson = lessons.id INNER JOIN teachers ON timetable.teacher = teachers.id INNER JOIN rooms ON timetable.room = rooms.id WHERE (timetable.groupname = '34' ) ORDER BY lessons.name, timetable.subgroup DESC";
+	
+	// if ($week != 7) 
+	// {
+	// 	if ($status == 0) 
+	// 	{
+	// 		$timetable_q = "SELECT timetable.number,lessons.name ,teachers.name ,rooms.name FROM timetable INNER JOIN lessons ON timetable.lesson = lessons.id INNER JOIN teachers ON timetable.teacher = teachers.id INNER JOIN rooms ON timetable.room = rooms.id WHERE (timetable.groupname = '".$group."' AND timetable.day = '".$week."') ORDER BY timetable.number,lessons.name;";
+	// 	}else
+	// 	{
+	// 		$timetable_q = "SELECT timetable.number,lessons.name ,groups.name ,rooms.name FROM timetable INNER JOIN lessons ON timetable.lesson = lessons.id INNER JOIN groups ON timetable.groupname = groups.id INNER JOIN rooms ON timetable.room = rooms.id WHERE (timetable.teacher = '".$teacher."' AND timetable.day = '".$week."') ORDER BY timetable.number,lessons.name;";
+	// 	}
+	// }
+	// else
+	// {
+	// 	if ($status == 0) 
+	// 	{
+	// 		$timetable_q = "SELECT timetable.day,timetable.number,lessons.name ,teachers.name ,rooms.name FROM timetable INNER JOIN lessons ON timetable.lesson = lessons.id INNER JOIN teachers ON timetable.teacher = teachers.id INNER JOIN rooms ON timetable.room = rooms.id WHERE (timetable.groupname = '".$group."') ORDER BY  timetable.day,timetable.number,lessons.name";
+	// 	}else
+	// 	{
+	// 		$timetable_q = "SELECT timetable.day,timetable.number,lessons.name ,groups.name ,rooms.name FROM timetable INNER JOIN lessons ON timetable.lesson = lessons.id INNER JOIN groups ON timetable.groupname = groups.id INNER JOIN rooms ON timetable.room = rooms.id WHERE (timetable.teacher = '".$teacher."') ORDER BY   timetable.day,timetable.number,lessons.name;";
+	// 	}
+	// }
+
+	$timetable = mysqli_query($link, $timetable_q) or die ("ошибка2 ".mysqli_connect_error($link));
+	$rows = mysqli_num_rows($timetable);
+	$arg = "";
+	$tru = false
+
+	for ($i=0; $i < $rows; $i++) { 
+		$row = mysqli_fetch_row($timetable);
+		if ($arg != $row[3]){
+			$arg = $row[3];
+			$tru = false;
+		}
+		if($row[2]=="2"){$tru = true;}
+		
+
+		if($tru){
+			$answer[(int)$row[0]-1][(int)$row[1]-1][$row[2]]["Name_Lessons"] = $row[3];
+			$answer[(int)$row[0]-1][(int)$row[1]-1][$row[2]]["Who_Is_Who"] = $row[4];
+			$answer[(int)$row[0]-1][(int)$row[1]-1][$row[2]]["Room"] = $row[5];
+			$answer[(int)$row[0]-1][(int)$row[1]-1][$row[2]]["Sungroup"] = $row[2];
+		}else{
+			$answer[(int)$row[0]-1][(int)$row[1]-1]["1"]["Name_Lessons"] = $row[3];
+			$answer[(int)$row[0]-1][(int)$row[1]-1]["1"]["Who_Is_Who"] = $row[4];
+			$answer[(int)$row[0]-1][(int)$row[1]-1]["1"]["Room"] = $row[5];
+			$answer[(int)$row[0]-1][(int)$row[1]-1]["1"]["Sungroup"] = "0";
+		}
+	}
+
+
+
+	// if($week != 7){
+	// 	for ($i=0; $i < $rows; $i++) { 
+	// 		$row = mysqli_fetch_row($timetable);
+	// 		for($j = 0;$j<12;$j++){
+	// 			if($answer[(int)$row[0]-1]["lesson"] == "" and $answer[$j]["number"] == $row[0]){
+	// 				$answer[(int)$row[0]-1]["number"] = $row[0];
+	// 				$answer[(int)$row[0]-1]["lesson"] = $row[1];
+	// 				$answer[(int)$row[0]-1]["list"] = $row[2];
+	// 				$answer[(int)$row[0]-1]["room"] = $row[3];
+	// 			}else if ($answer[(int)$row[0]-1]["lesson"] != "" and $answer[$j]["number"] == $row[0]){
+	// 				// $j++;
+	// 				$answer[(int)$row[0]-1]["number"] = $row[0];
+	// 				$answer[(int)$row[0]-1]["lesson"] .= " | ".$row[1];
+	// 				$answer[(int)$row[0]-1]["list"] .= " | ".$row[2];
+	// 				$answer[(int)$row[0]-1]["room"] .= " | ".$row[3];
+	// 			}
+	// 		}
+	// 	}
+	// }else{
+	// 	for ($i=0; $i < $rows ; $i++) { 
+	// 		$row = mysqli_fetch_row($timetable);
+	// 		for ($j=0; $j < 12 ; $j++) {
+	// 			for ($k=1; $k < 8 ; $k++) { 
+	// 				if($answer[$j][0] == $row[1] and $k == $row[0] and ($answer[(int)$row[1]-1][$k]["lessonList"] == "")){
+	// 					$answer[$j][$k]["lessonList"] = $row[2]."<br>(".$row[3].")";
+	// 					$answer[$j][$k]["room"] = $row[4];
+	// 				}else if($answer[$j][0] == $row[1] and $k == $row[0] and  $answer[(int)$row[1]-1][$k]['lessonList'] != ""){
+	// 					$answer[$j][$k]["lessonList"] .= "|". $row[2]."<br>(".$row[3].")";
+	// 					$answer[$j][$k]["room"] .= "|". $row[4];
+	// 				}
+	// 			} 
+	// 		}
+	// 	}
+	// }
+	mysqli_close($link);
+
+///======================================================================================
+///
+///  Отправка массива
+///  
+///======================================================================================
+	echo json_encode($answer);
+
+ ?>

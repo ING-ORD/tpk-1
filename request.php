@@ -50,13 +50,17 @@ function addChangeGroupWeek(array $answer,array $change_bd, $i){
 ///==================================================================================================================================================================
 
 	$status = $_POST["status"];
+	// $status = 1;
 	$change = $_POST["change"];
+	$change = 0;
 	if ($status == 0){
 		$group = $_POST["group"];
 	}else{
 		$teacher = $_POST["teacher"];
 	}
+	// $teacher = 6;
 	$week = $_POST["week"];
+	// $week = 2;
 	if ($week != 7) {
 		$answer = array(
 			array("number"=>"1","lesson"=>"","list"=>"","room"=>""),
@@ -185,12 +189,12 @@ function addChangeGroupWeek(array $answer,array $change_bd, $i){
 		);
 	}
 	$answer_add;
-	$change_bd = array(
-		array("1","Замена","Мой предмет_Замена","Я","312","1"),
-		array("11","Будет","Мой предмет_Будет","Я","415","2"),
-		array("3","Отмена","Предмета не будет","Я","","3"),
-		array("2","Замена преподавателя","Мой предмет_с другим преподавателем","Я","221","5")
-	);
+	// $change_bd = array(
+	// 	array("1","Замена","Мой предмет_Замена","Я","312","1"),
+	// 	array("11","Будет","Мой предмет_Будет","Я","415","2"),
+	// 	array("3","Отмена","Предмета не будет","Я","","3"),
+	// 	array("2","Замена преподавателя","Мой предмет_с другим преподавателем","Я","221","5")
+	// );
 
 
 ///==================================================================================================================================================================
@@ -229,9 +233,12 @@ function addChangeGroupWeek(array $answer,array $change_bd, $i){
 
 	$timetable = mysqli_query($link, $timetable_q) or die ("ошибка2 ".mysqli_connect_error($link));
 	$rows = mysqli_num_rows($timetable);
+	// echo("Перед забиванием ");
+	// echo $rows."\n";
 	if($week != 7){
 		for ($i=0; $i < $rows; $i++) { 
 			$row = mysqli_fetch_row($timetable);
+			// echo $row;
 			for($j = 0;$j<12;$j++){
 				if($answer[(int)$row[0]-1]["lesson"] == "" and $answer[$j]["number"] == $row[0]){
 					$answer[(int)$row[0]-1]["number"] = $row[0];
@@ -245,6 +252,7 @@ function addChangeGroupWeek(array $answer,array $change_bd, $i){
 					$answer[(int)$row[0]-1]["list"] .= " | ".$row[2];
 					$answer[(int)$row[0]-1]["room"] .= " | ".$row[3];
 				}
+				// echo "процес забивания";
 			}
 		}
 	}else{

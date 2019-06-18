@@ -10,6 +10,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="Cache-Control" content="no-cache">
 	<title>Расписание КЦПТ</title>
+	<link rel="stylesheet" href="bootstrap.css">
 	<link rel="stylesheet" href="Style.css">
 	<link rel="stylesheet" href="CSScheckbox.css">
 	<link rel="stylesheet" href="CSSselectbox.css">
@@ -23,7 +24,16 @@
 			alarmS_TO = ["8:15","9:00","9:50","10:35","11:50","12:35","13:30","14:15","15:10","15:55","16:45","17:30"],
 			alarmS_DO = ["9:00","9:45","10:35","11:20","12:35","13:20","14:15","15:00","15:55","16:40","17:30","18:15"]
 
-		alert("ss");
+		function ajaxRequest(file,parametrs,func){
+			$.ajax({
+				url: file,
+				type:"POST",
+				data: parametrs ,
+				datatype: "json",
+				success: func
+			});
+			console.log(parametrs);
+		}
 
 		function getWeekDay(date) {
 		    date = date || new Date();
@@ -96,7 +106,6 @@
 			return html;
 		}
 
-
 		function funcList (data){
 			var answer = JSON.parse(data);
 			for (var i = 0 ; i<answer.length ; i++){
@@ -107,11 +116,11 @@
 			}
 		}
 
-
 		function funcSeccess(data){
 			var answer = JSON.parse(data);
 			var TO =-1;
 			var DO =-1;
+			console.log(JSON.stringify(data))
 			for (var i = 0; i < answer.length; i++) 
 			{	
 				if($("select#week").val() != 7){
@@ -179,83 +188,90 @@
 				{
 					if($("input.change").val() == "1"){
 						$("input.change").val("0");
-						$.ajax({
-							url:"request.php",
-							type:"POST",
-							data: { 
+						ajaxRequest("request.php",{ 
 								change: $("input.change").val(),
-								status: $("input.status").val(),
+								status: document.querySelector("#nav li a.active").getAttribute("value"),
 								group: $("select.list").val(),
 								week: $("select#week").val()
-							} ,
-							datatype: "json",
-							success: funcSeccess
-						});
+							},funcSeccess)
+						
+						// $.ajax({
+						// 	url: "request.php",
+						// 	type:"POST",
+						// 	data: { 
+						// 		change: $("input.change").val(),
+						// 		status: $("input.status").val(),
+						// 		group: $("select.list").val(),
+						// 		week: $("select#week").val()
+						// 	},
+						// 	datatype: "json",
+						// 	success: funcSeccess
+						// });
 					}else{
 						$("input.change").val("1");
-						$.ajax({
-							url:"request.php",
-							type:"POST",
-							data: { 
+						ajaxRequest("request.php",{ 
 								change: $("input.change").val(),
-								status: $("input.status").val(),
+								status: document.querySelector("#nav li a.active").getAttribute("value"),
 								group: $("select.list").val(),
 								week: $("select#week").val()
-							} ,
-							datatype: "json",
-							success: funcSeccess
-						});
+							},funcSeccess)
+						// $.ajax({
+						// 	url: "request.php",
+						// 	type:"POST",
+						// 	data: { 
+						// 		change: $("input.change").val(),
+						// 		status: $("input.status").val(),
+						// 		group: $("select.list").val(),
+						// 		week: $("select#week").val()
+						// 	},
+						// 	datatype: "json",
+						// 	success: funcSeccess
+						// });
 					}
 				}else
 				{
 					$("input.change").val("0");
-					$.ajax({
-						url:"request.php",
-						type:"POST",
-						data: { 
+					ajaxRequest("request.php",{ 
 							change: $("input.change").val(),
-							status: $("input.status").val(),
+							status: document.querySelector("#nav li a.active").getAttribute("value"),
 							teacher: $("select.list").val(),
 							week: $("select#week").val()
-						} ,
-						datatype: "json",
-						success: funcSeccess
-					});
+						})
+					// $.ajax({
+					// 	url: "request.php",
+					// 	type:"POST",
+					// 	data: { 
+					// 		change: $("input.change").val(),
+					// 		status: $("input.status").val(),
+					// 		teacher: $("select.list").val(),
+					// 		week: $("select#week").val()
+					// 	},
+					// 	datatype: "json",
+					// 	success: funcSeccess
+					// });
 				}
 			})
 
 			//ЛОГИКА ДЛЯ СПИСКА СТУДЕНТ/ПРЕПОДАВАТЕЛЬ
 			
 			$("select.list").on("click", function(){
-
-				if($("input.status").val() == "0")
-				{
-					$.ajax({
-						url:"request.php",
-						type:"POST",
-						data: { 
+				statusVal = document.querySelector("#nav li a.active").getAttribute("value");
+				if(statusVal == "0")
+				{	
+					ajaxRequest("request.php",{ 
 							change: $("input.change").val(),
-							status: $("input.status").val(),
+							status: statusVal,
 							group: $("select.list").val(),
 							week: $("select#week").val()
-						} ,
-						datatype: "json",
-						success: funcSeccess
-					});
+						},funcSeccess)
 				}else
 				{
-					$.ajax({
-						url:"request.php",
-						type:"POST",
-						data: { 
+					ajaxRequest("request.php",{ 
 							change: $("input.change").val(),
-							status: $("input.status").val(),
+							status: statusVal,
 							teacher: $("select.list").val(),
 							week: $("select#week").val()
-						} ,
-						datatype: "json",
-						success: funcSeccess
-					});
+						},funcSeccess)
 				}
 				$("select.list").removeClass("open");
 				$(this).removeClass("op-sel");
@@ -265,33 +281,21 @@
 			//ЛОГИКА ДЛЯ МЕНЮ С ДНЯМИ НЕДЕЛИ
 
 			$("select#week").on("click", function(){
-			
-				if($("input.status").val() == "0"){
-					$.ajax({
-						url:"request.php",
-						type:"POST",
-						data: { 
+				statusVal = document.querySelector("#nav li a.active").getAttribute("value");				
+				if(statusVal == "0"){
+					ajaxRequest("request.php",{ 
 							change: $("input.change").val(),
-							status: $("input.status").val(),
+							status: statusVal,
 							group: $("select.list").val(),
 							week: $("select#week").val()
-						} ,
-						datatype: "json",
-						success: funcSeccess
-					});
+						},funcSeccess)
 				}else{
-					$.ajax({
-						url:"request.php",
-						type:"POST",
-						data: { 
+					ajaxRequest("request.php",{ 
 							change: $("input.change").val(),
-							status: $("input.status").val(),
+							status: statusVal,
 							teacher: $("select.list").val(),
 							week: $("select#week").val()
-						} ,
-						datatype: "json",
-						success: funcSeccess
-					});
+						},funcSeccess)
 				}
 				$("select[name='groups']").removeClass("open");
 				$(this).removeClass("op-sel");
@@ -302,52 +306,33 @@
 			//ЛОГИКА ДЛЯ КНОПКИ ГРУППА/ПРЕПОДАВАТЕЛЬ
 
 			$("div.status input.status").on("click",function(){
-
-				$.ajax({
-					url:"list_request.php",
-					type:"POST",
-					data: {
-						status: $("input.status").val()
-					},
-					datatype:"json",
-					success: funcList
-				});
+					ajaxRequest("list_request.php",{
+							status: $("input.status").val()
+						},funcList)
 				if ($("input.status").val() == "0") {
 					$("input.status").val("1");
-					$.ajax({
-						url:"request.php",
-						type:"POST",
-						data: {
+					ajaxRequest("request.php",{
 							change: $("input.change").val(),
-							status: $("input.status").val(),
+							status: document.querySelector("#nav li a.active").getAttribute("value"),
 							teacher: $("select.list").val(),
 							week: $("select#week").val()
-						} ,
-						datatype: "json",
-						success: funcSeccess
-					});
+						},funcSeccess)
 					$("label#status").html("Преподаватель");
 					$(".table_of_contents").children("th:nth-child(3)").html("Группа");
 				}else{
 					$("input.status").val("0");
-					$.ajax({
-						url:"request.php",
-						type:"POST",
-						data: {
+					ajaxRequest("request.php",{
 							change: $("input.change").val(),
-							status: $("input.status").val(),
+							status: document.querySelector("#nav li a.active").getAttribute("value"),
 							group: $("select.list").val(),
 							week: $("select#week").val()
-						} ,
-						datatype: "json",
-						success: funcSeccess
-					});
+						},funcSeccess)
 					$("label#status").html("Группа");
 					$(".table_of_contents").children("th:nth-child(3)").html("Преподаватель");
 				}
 			});
 
-
+	
 
 		});
 	</script>
@@ -355,97 +340,172 @@
 	<!--End JavaScript (Jquery)!-->
 
 </head>
-<body>	
+<body>
 	<h1>Расписание КЦПТ</h1>
-	<form name="ginerat"  action="" method="post">
-        <div class="status">
-        	<label for="status">Статус</label>
-            <label name="status">
+	<a href="#" class="btn btn-primary popup-btn">+</a>
+	
+	
+	<form class="container" name="ginerat"  action="" method="post" style="display: none;">
+		<ul class="nav nav-tabs" id="nav">
+			<li class="nav-item">
+				<a class="nav-link active status1" href="#" value="0">Студенты</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link status0" href="#" value="1">Преподаватели</a>
+			</li>
+			<!-- <li class="nav-item">
+				<a class="nav-link disabled" href="#">Студенты с изменениями</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link disabled" href="#">Преподаватели  с изменениями</a>
+			</li> -->
+		</ul>
+		<!-- <div class="status" style="desplay:none">
+			<label for="status">Статус</label>
+			<label name="status">
 				<input type="checkbox" class="status" name="" value="0">
 				<span class="check"></span>
 				<span class="text on">Преподаватель</span>
 				<span class="text off">Студент</span>
 			</label>
-        </div>
-        <div class="time_day"><script>$(".time_day").html(getWeekDay())</script></div>
-        <div class="but-alarm">
-            <div class="but-alarm_text">Звонки</div>
-            <div style="display: none;" class="popap">
-                <div class="blyr"></div>
-                <div class="but-alarm_cont">
-                    <table class="content">
-                        <tr><th>Понеденельник-<br>Пятница</th><th>Суббота</th></tr>
-                        <?php 
-                            for ($i=0; $i < 12; $i++) { ?>
-                            <script>
-                                $(".but-alarm_cont table.content").append("<tr><td>"+ alarm_TO[<?php echo ($i); ?>]+ "-" + alarm_DO[<?php echo ($i); ?>] + "</td><td>"+ alarmS_TO[<?php echo ($i); ?>]+ "-" + alarmS_DO[<?php echo ($i); ?>] +"</td></tr>");
-                            </script>
-                            <?php } 
-                        ?>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="btn-change">
-        	<a href="https://docs.google.com/file/d/0Bzp0m-6aOGdLZVFwcHdUcElLY2c/preview" target="_blank">Изменения</a>
-        </div>
-        <!-- <div class="change">
-        	<label for="change">Изменения</label>
-            <label name="change">
-				<input type="checkbox" class="change" name="" value="0">
-				<span class="check"></span>
-				<span class="text on">С</span>
-				<span class="text off">Без</span>
-			</label>
-        </div> -->
+		
+		</div> -->
+	
+		<div class="row row justify-content-center mt-2 mb-2">
+			
+			<div class="col-md-5">
+				<a class="btn btn-primary btn-change" href="https://docs.google.com/file/d/0Bzp0m-6aOGdLZVFwcHdUcElLY2c/preview" target="_blank">Изменения</a>
+			</div>
+			
+			<!-- <div class="but-alarm col-md-5">
+			
+				<div class="btn btn-primary but-alarm_text">Звонки</div>
+				<div style="display: none;" class="popap">
+					<div class="blyr"></div>
+					<div class="but-alarm_cont">
+						<table class="content">
+							<tr><th>Понеденельник-<br>Пятница</th><th>Суббота</th></tr>
+							<?php 
+								//for ($i=0; $i < 12; $i++) { ?>
+								<script>
+									$(".but-alarm_cont table.content").append("<tr><td>"+ alarm_TO[<?php //echo ($i); ?>]+ "-" + alarm_DO[<?php //echo ($i); ?>] + "</td><td>"+ alarmS_TO[<?php echo ($i); ?>]+ "-" + alarmS_DO[<?php echo ($i); ?>] +"</td></tr>");
+								</script>
+								<?php// }
+							?>
+						</table>
+					</div>
+				</div>
+			</div> -->
+		</div>
+		<div class="row justify-content-between">
+				
 
-        <?php 
+			<?php
 
-            $query_groups = "SELECT groups.name FROM groups;";
+				$query_week = "SELECT week.name FROM week;";
 
-            $result_groups = mysqli_query($link,$query_groups) 
-            or die("ошибка ".mysqli_connect_error($link));
+				$result_week = mysqli_query($link,$query_week) 
+				or die("ошибка ".mysqli_connect_error($link));
+				$rows_week  = mysqli_num_rows($result_week);
 
+				echo "<div class=\"week_form  col-md-5\"><div class=\"row\"><div class=\"col-md-4\"><label style=\"display: inline-block; width: 125px\">День недели</label></div>";
+				echo "<div class=\"col-md-8\"><select name='week' id='week' class='box' value = '".$day_id."'>";
+				for ($g = 1;$g<$rows_week+1;++$g){
+					$row_week = mysqli_fetch_row($result_week);
+					echo "<option value = \"".$g."\"><a href =\"#\">".$row_week[0]."</a></option>";
+				}
+				echo "<option value='7'>Неделя</option>";
+				mysqli_free_result($result_week);
+				echo "</select></div></div></div>";
+			?>
+			<?php 
+				$query_groups = "SELECT groups.name FROM groups;";
 
+				$result_groups = mysqli_query($link,$query_groups) 
+				or die("ошибка ".mysqli_connect_error($link));
 
-            $rows_groups  = mysqli_num_rows($result_groups);
-            echo "<div class=\"list_form\"><label id=\"status\" style=\"display: inline-block; width: 85px\">Группа</label>";
-            echo "<select name='groups' class= 'list box' id='groups'>";
+				$rows_groups  = mysqli_num_rows($result_groups);
+				echo "<div class=\"list_form  col-md-5\"><label id=\"status\" style=\"display: inline-block; width: 85px\">Группа</label>";
+				echo "<select name='groups' class= 'list box' id='groups'>";
 
-            for ($g = 1;$g<$rows_groups+1;++$g){
-                $row_groups = mysqli_fetch_row($result_groups);
-                echo "<option ";
-                if ($g == 1){echo "selected";}
-                echo " value = \"".$g."\">";
-                echo "<a href =\"#\">".$row_groups[0]."</a>";
-                echo "</option>";
-            }
-            mysqli_free_result($result_groups);
-            echo "</select></div>";
+				for ($g = 1;$g<$rows_groups+1;++$g){
+					$row_groups = mysqli_fetch_row($result_groups);
+					echo "<option ";
+					if ($g == 1){echo "selected";}
+					echo " value = \"".$g."\">";
+					echo "<a href =\"#\">".$row_groups[0]."</a>";
+					echo "</option>";
+				}
+				mysqli_free_result($result_groups);
+				echo "</select></div>";
+			?>
+		</div>
 
+			<!-- <div class="change">
+				<label for="change">Изменения</label>
+				<label name="change">
+					<input type="checkbox" class="change" name="" value="0">
+					<span class="check"></span>
+					<span class="text on">С</span>
+					<span class="text off">Без</span>
+				</label>
+			</div> -->
 
-            $query_week = "SELECT week.name FROM week;";
-
-            $result_week = mysqli_query($link,$query_week) 
-            or die("ошибка ".mysqli_connect_error($link));
-            $rows_week  = mysqli_num_rows($result_week);
-
-            echo "<div class=\"week_form\"><label style=\"display: inline-block; width: 125px\">День недели</label>";
-            echo "<select name='week' id='week' class='box' value = '".$day_id."'>";
-            for ($g = 1;$g<$rows_week+1;++$g){
-                $row_week = mysqli_fetch_row($result_week);
-                echo "<option value = \"".$g."\"><a href =\"#\">".$row_week[0]."</a></option>";
-            }
-            echo "<option value='7'>Неделя</option>";
-            mysqli_free_result($result_week);
-            echo "</select></div>";
-        ?>
+        
 	</form>
-	<hr>
-<?php 
+	<div class="container-progress">
+		<div class="time_day col-md-2"><script>$(".time_day").html(getWeekDay())</script></div>
+		<div class="progress" style="height: 20px;">
+			<div class="time_alarm" style="width: 3.333%"></div>
+			<div class="time_alarm is_day" style="width: 9.999%"> <span class="popup-progress"><div>1 урок</div><div id="time_alarm_an_para">8:15 - 9:00</div></span>1</div>
+			<div class="time_alarm is_day" style="width: 9.999%"> <span class="popup-progress"><div>2 урок</div><div id="time_alarm_an_para">8:15 - 9:00</div></span>2</div>
+			<div class="time_alarm" style="width: 6.666%">#</div>
+			<div class="time_alarm is_day" style="width: 9.999%"> <span class="popup-progress"><div>3 урок</div><div id="time_alarm_an_para">8:15 - 9:00</div></span>3</div>
+			<div class="time_alarm is_day" style="width: 9.999%"> <span class="popup-progress"><div>4 урок</div><div id="time_alarm_an_para">8:15 - 9:00</div></span>4</div>
+			<div class="time_alarm" style="width: 6.666%">#</div>
+			<div class="time_alarm is_day" style="width: 9.999%"> <span class="popup-progress"><div>5 урок</div><div id="time_alarm_an_para">8:15 - 9:00</div></span>5</div>
+			<div class="time_alarm" style="width: 9.999%"> <span class="popup-progress"><div>6 урок</div><div id="time_alarm_an_para">8:15 - 9:00</div></span>6</div>
+			<div class="time_alarm" style="width: 6.666%">#</div>
+			<div class="time_alarm" style="width: 9.999%"> <span class="popup-progress"><div>7 урок</div><div id="time_alarm_an_para">8:15 - 9:00</div></span>7</div>
+			<div class="time_alarm" style="width: 9.999%"> <span class="popup-progress"><div>8 урок</div><div id="time_alarm_an_para">8:15 - 9:00</div></span>8</div>
+			<div class="time_alarm" style="width: 6.666%">#</div>
+			<div class="time_alarm" style="width: 9.999%"> <span class="popup-progress"><div>9 урок</div><div id="time_alarm_an_para">8:15 - 9:00</div></span>9</div>
+			<div class="time_alarm" style="width: 9.999%"> <span class="popup-progress"><div>10 урок</div><div id="time_alarm_an_para">8:15 - 9:00</div></span>10</div>
+			<div class="time_alarm" style="width: 6.666%">#</div>
+			<div class="time_alarm" style="width: 9.999%"> <span class="popup-progress"><div>11 урок</div><div id="time_alarm_an_para">8:15 - 9:00</div></span>11</div>
+			<div class="time_alarm" style="width: 9.999%"> <span class="popup-progress"><div>12 урок</div><div id="time_alarm_an_para">8:15 - 9:00</div></span>12</div>
+			<div class="time_alarm" style="width: 3.333%"></div>
+			<!-- <div class="time_status" style="width: 5.999%" aria-valuenow="0.83335" aria-valuemin="0" aria-valuemax="100">Будни</div> -->
+		</div>
+		<div class="info_alarm">
+			<span>подробнее</span>
+		</div>
+		<div class="info_alarm_container">
+			<div class="progress-bar-info" style="width: 50px;">
+				<div class="time_alarm_info is_day_info"><span class="time_alarm_info_context">1 урок</span></div>
+				<div class="time_alarm_info is_day_info"><span class="time_alarm_info_context">2 урок</span></div>
+				<div class="time_alarm_info"><span class="time_alarm_info_context">Перемена</span></div>
+				<div class="time_alarm_info is_day_info"><span class="time_alarm_info_context">3 урок</span></div>
+				<div class="time_alarm_info is_day_info"><span class="time_alarm_info_context">4 урок</span></div>
+				<div class="time_alarm_info"><span class="time_alarm_info_context">Перемена</span></div>
+				<div class="time_alarm_info is_day_info"><span class="time_alarm_info_context">5 урок</span></div>
+				<div class="time_alarm_info"><span class="time_alarm_info_context">6 урок</span></div>
+				<div class="time_alarm_info"><span class="time_alarm_info_context">Перемена</span></div>
+				<div class="time_alarm_info"><span class="time_alarm_info_context">7 урок</span></div>
+				<div class="time_alarm_info"><span class="time_alarm_info_context">8 урок</span></div>
+				<div class="time_alarm_info"><span class="time_alarm_info_context">Перемена</span></div>
+				<div class="time_alarm_info"><span class="time_alarm_info_context">9 урок</span></div>
+				<div class="time_alarm_info"><span class="time_alarm_info_context">10 урок</span></div>
+				<div class="time_alarm_info"><span class="time_alarm_info_context">Перемена</span></div>
+				<div class="time_alarm_info"><span class="time_alarm_info_context">11 урок</span></div>
+				<div class="time_alarm_info"><span class="time_alarm_info_context">12 урок</span></div>
+			</div>
+		</div>
+	</div>
+	<?php 
 
-	mysqli_close($link);
-?>	
+		mysqli_close($link);
+	?>	
 	<div class="main">
 		<div class="TO-DO"></div>
 		<div class="weekend">
@@ -457,5 +517,49 @@
 			</table>
 		</div>
 	</div>
+	<script>
+		var linkNav = document.getElementById("nav")
+		linkNav.addEventListener('click', function(e) {
+			if (!e.target.classList.contains('nav-link') || e.target.classList.contains("disabled")) 
+				return; 
+			e.preventDefault();                                
+			for (let link of this.querySelectorAll('li a.nav-link'))  
+				link.classList.remove('active'); 
+			e.target.classList.add('active');
+			if (e.target.classList.contains('status0')){
+				ajaxRequest("list_request.php",{
+						status: "0"
+					},funcList)
+				ajaxRequest("request.php",{ 
+						change: $("input.change").val(),
+						status: "1",
+						teacher: $("select.list").val(),
+						week: $("select#week").val()
+					},funcSeccess)
+			}else if ( e.target.classList.contains('status1') ) {
+				ajaxRequest("list_request.php",{
+						status: "1"
+					},funcList)
+				ajaxRequest("request.php",{ 
+					change: $("input.change").val(),
+					status: "0",
+					group: $("select.list").val(),
+					week: $("select#week").val()
+				},funcSeccess)
+			}          
+		}); 
+		document.querySelector(".popup-btn").addEventListener("click",function(){
+			var form = document.querySelector("form.container");
+			if (form.style.display == "none"){
+				form.style.display = "block";
+				document.body.classList.add("no-scroll");
+				// document.querySelector("html").style.blur = "5px";
+			}
+			else{
+				form.style.display = "none";
+				document.body.classList.remove("no-scroll");
+			}
+		});
+	</script>
 </body>
 </html>

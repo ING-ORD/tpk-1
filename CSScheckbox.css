@@ -1,3 +1,8 @@
+/* *,
+*:hover,
+*:after{
+    box-sizing:border-box
+} */
 label
 {
     position: relative;
