@@ -83,6 +83,8 @@ form.container{
 div.time_alarm{
     text-align: center;
     color: #ffffff;
+    font-size: 1.5em;
+    line-height: 25px;
     border: 1px solid rgb(83, 83, 83);
     border-right: 0;
     background-image : url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAC5JREFUeNpiXLVu038GBgZGBgggic1ErkYQm4lcjSA2E7kaR5096uxB7myAAAMAHxVNKHBU9HoAAAAASUVORK5CYII=");
@@ -138,11 +140,11 @@ div.time_alarm.is_day{
 .popup-progress{
     color: #ffffff;
     background: #1875d1;
-    width: 100px;
-    height: 40px;
+    width: 125px;
+    height: 60px;
     position: absolute;
     transform: translate(-50%,-50%);
-    margin-top:40px;
+    margin-top:55px;
     /* display: none; */
     visibility: hidden;
     z-index: 1;

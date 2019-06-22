@@ -39,10 +39,10 @@
 
 		function getWeekDay(date) {
 		    date = date || new Date();
-		    var days = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+		    var days = ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'];
 		    var day = date.getDay();
 
-		    return days[day];
+		    return "Сегодня "+days[day];
 		}
 
 		function chengeAlarm(TO,DO,lesson_to,lesson_do,turn_to_do){
@@ -182,13 +182,19 @@
 
 			}
 			if($("select#week").val() < 6 && TO != -1 && DO !=-1){
-				$(".TO-DO").html("Cегодня с : "+alarm_TO[TO-1]+" до :"+alarm_DO[DO-1])
+				isDayWeek = ['!', 'Сегодня понедельник', 'Сегодня вторник', 'Сегодня среда', 'Сегодня четверг', 'Сегодня пятница'][$("select#week").val()] == getWeekDay() ? "Сегодня" : ["!","В понеднльник","Во вторник","В среду","В четверг","В пятницу"][$("select#week").val()]
+
+				$(".TO-DO").html(isDayWeek+" с : "+alarm_TO[TO-1]+" до :"+alarm_DO[DO-1])
 				chengeAlarm(TO,DO,alarm_TO,alarm_DO,to_do_Turn)
+
 			}else if ($("select#week").val() == 6 && TO != -1 && DO !=-1){
-				$(".TO-DO").html("Cегодня с : "+alarmS_TO[TO-1]+" до : "+alarmS_DO[DO-1])
+
+				isDayWeek = "Сегодня суббота" == getWeekDay() ? "Сегдня" : "В субботу"
+				$(".TO-DO").html(isDayWeek+" с : "+alarmS_TO[TO-1]+" до : "+alarmS_DO[DO-1])
 				chengeAlarm(TO,DO,alarmS_TO,alarmS_DO,to_do_STurn)
+
 			} else if ($("select#week").val() != 7) {
-				$(".TO-DO").html("Сегодня нет пар")
+				$(".TO-DO").html("В "+['Воскресенье', 'понедельник', 'вторник', 'среду', 'четверг', 'пятницу', 'субботу'][$("select#week").val()]+" нет пар")
 				$("#week_day").html("")
 			}
 			if($("select#week").val() == 7){
@@ -337,7 +343,7 @@
 </head>
 <body>
 	<h1>Расписание КЦПТ</h1>
-	<a href="#" class="btn btn-primary popup-btn">+</a>
+	<a href="#" class="btn btn-primary popup-btn">Настройки</a>
 	
 	
 	<form class="container" name="ginerat"  action="" method="post" style="display: none;">
@@ -450,8 +456,8 @@
 	</form>
 	<div class = "is_blur"></div>
 	<div class="container-progress">
-		<div class="time_day col-md-2"><script>$(".time_day").html(getWeekDay())</script></div>
-		<div class="progress" id="bar" style="height: 20px;">
+		<div class="time_day"><script>$(".time_day").html(getWeekDay())</script></div>
+		<div class="progress" id="bar" style="height: 25px;">
 			<div class="time_alarm" style="width: 3.333%"></div>
 			<div class="time_alarm lesson" style="width: 9.999%"> <span class="popup-progress"><div>1 урок</div><div class="time_alarm_an_para">8:15 - 9:00</div></span>1</div>
 			<div class="time_alarm lesson" style="width: 9.999%"> <span class="popup-progress"><div>2 урок</div><div class="time_alarm_an_para">9:00 - 9:45</div></span>2</div>
@@ -533,6 +539,7 @@
 					group: $("select.list").val(),
 					week: $("select#week").val()
 				},funcSeccess);
+				document.querySelector(".popup-btn").classList.add("onc");
 			}
 		
 			document.querySelector(".is_blur.blur").addEventListener("click",function(){
