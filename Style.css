@@ -11,6 +11,16 @@ body.no-scroll{
    position: fixed;
    overflow: hidden;
 }
+.blur{
+    position: absolute;
+    /* filter: blur(5px); */
+    background-color: rgba(83, 83, 83, .8);
+    width: 100%;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    z-index: 9;
+}
 /* html{
     background-color: #63a3ff;
 } */
@@ -52,8 +62,8 @@ form{
     position: absolute;
     top: 50%;left:50%;
     transform: translate(-50%,-50%);
-    border: 2px solid rgb(76, 230, 84);
-    border-radius:15px;
+    /* border: 2px solid #004a9f; */
+    /* border-radius:15px; */
     padding: 10px;
     background: #f3f3f3;
     z-index: 10;
@@ -61,6 +71,7 @@ form{
 form.container{
     /* background-color: #63a4ff */
     background: #ffffff;
+    padding: 0;
 }
 /* div.time_status{
     color: #ffffff;
@@ -72,12 +83,36 @@ form.container{
 div.time_alarm{
     text-align: center;
     color: #ffffff;
+    font-size: 1.5em;
+    line-height: 25px;
     border: 1px solid rgb(83, 83, 83);
     border-right: 0;
     background-image : url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAC5JREFUeNpiXLVu038GBgZGBgggic1ErkYQm4lcjSA2E7kaR5096uxB7myAAAMAHxVNKHBU9HoAAAAASUVORK5CYII=");
     /* background-color : none ;  */
     background-color: #63a4ff;
 }
+
+/* #nav{
+    padding:0;
+    margin:0;
+} */
+.nav-tabs .nav-link:hover{
+    border: none;
+    border-radius: none;
+    color:#000;
+}
+.nav-tabs .nav-link.active{
+    border: none;
+    color: #000;
+    border-radius: none;
+    border-bottom: 2px solid #004a9f;
+}
+.nav-tabs .nav-link{
+    border: none;
+    border-radius: none;
+    color: #495057  
+}
+
 .progress{
     border-radius: 5px;
     margin: 0 15px 0 15px;
@@ -102,71 +137,14 @@ div.time_alarm.is_day{
     background-color : #004a9f;
 }
 
-.progress-bar-info{
-    margin-left: 20px;
-    display: block;
-    height: 460px;
-    /* flex-direction: column; */
-
-}
-.time_alarm_info{
-    display: block;
-    height: 50px;
-    width: 50px;
-}
-.time_alarm_info::before{
-    content: "";
-    /* font-family: FontAwesome; */
-    display: block;
-    height: 100%;
-    width: 15px;
-    background: #1875d1;
-    
-    /* color:green; */
-    transform: translate(-50%,-50%);
-    z-index:-10;
-}
-.info_alarm_container{
-    /* margin-top: 25px; */
-}
-.time_alarm_info::after
-{
-    /* margin-top: 20px; */
-    margin-bottom: -25px;
-    content: "";
-    color:red;
-    display: block;
-    height: 15px;
-    width: 15px;
-    background: #004a9f;
-    border-radius: 50%;
-    transform: translate(-50%,-50%)
-}
-.time_alarm_info:last-child::before{
-    content: "";
-
-}
-.time_alarm_info_context{
-    color: #ffffff;
-    background: #1875d1;
-    width: 100px;
-    height: 40px;
-    display: block;
-    /* transform: translate(-50%,-50%); */
-    margin-left:50px;
-    /* display: none; */
-    /* visibility: hidden; */
-    z-index: 1;
-}
-
 .popup-progress{
     color: #ffffff;
     background: #1875d1;
-    width: 100px;
-    height: 40px;
+    width: 125px;
+    height: 60px;
     position: absolute;
     transform: translate(-50%,-50%);
-    margin-top:40px;
+    margin-top:55px;
     /* display: none; */
     visibility: hidden;
     z-index: 1;

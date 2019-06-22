@@ -19,10 +19,12 @@
 	<!-- JavaScript (JQuery) -->
 
 	<script type="text/javascript">
-		var alarm_TO = ["8:15","9:00","9:55","10:40","11:55","12:40","13:55","14:40","15:40","16:25","17:20","18:05"],
-			alarm_DO = ["9:00","9:45","10:40","11:25","12:40","13:25","14:40","15:25","16:25","17:10","18:05","18:50"],
+		var alarm_TO = ["8:15","9:00","10:00","10:45","12:00","12:45","14:00","14:45","15:45","16:30","17:25","18:10"],
+			alarm_DO = ["9:00","9:45","10:45","11:30","12:45","13:30","14:45","15:30","16:30","17:15","18:10","18:55"],
 			alarmS_TO = ["8:15","9:00","9:50","10:35","11:50","12:35","13:30","14:15","15:10","15:55","16:45","17:30"],
-			alarmS_DO = ["9:00","9:45","10:35","11:20","12:35","13:20","14:15","15:00","15:55","16:40","17:30","18:15"]
+			alarmS_DO = ["9:00","9:45","10:35","11:20","12:35","13:20","14:15","15:00","15:55","16:40","17:30","18:15"],
+			to_do_Turn = [["9:45","11:30","13:30","15:30","17:15"],["10:00","12:00","14:00","15:45","17:25"]],
+			to_do_STurn = [["9:45","11:20","13:20","15:00","16:40"],["9:50","11:50","13:30","15:10","16:45"]]
 
 		function ajaxRequest(file,parametrs,func){
 			$.ajax({
@@ -37,10 +39,34 @@
 
 		function getWeekDay(date) {
 		    date = date || new Date();
-		    var days = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+		    var days = ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'];
 		    var day = date.getDay();
 
-		    return days[day];
+		    return "Сегодня "+days[day];
+		}
+
+		function chengeAlarm(TO,DO,lesson_to,lesson_do,turn_to_do){
+			var key_to = [2,3,5,6,8,9,11,12,14,15,17,18]
+			var alarm = $("#bar .lesson")
+			console.log(alarm.length)
+			//Удаление класса is_day
+			for (i=0; i<alarm.length ; i++) {
+				alarm.removeClass("is_day")
+			}
+			//Добавление класса is_day в промежутке от TO до DO
+			for (i=0; i<alarm.length ; i++) {
+				if (TO<=i+1 && i+1<=DO) {
+					document.querySelectorAll("#bar .lesson")[i].classList.add("is_day")
+				}
+			}
+			//Изменение звонков уроков
+			for (i=0; i<$("#bar .lesson div.time_alarm_an_para").length ; i++){
+				document.querySelectorAll("#bar .lesson div.time_alarm_an_para")[i].innerHTML = lesson_to[i]+" : "+lesson_do[i]
+			}
+			//Изменение звонков перемен
+			for (i=0; i<$("#bar .turn div.time_alarm_an_para").length ; i++){
+				document.querySelectorAll("#bar .turn div.time_alarm_an_para")[i].innerHTML = turn_to_do[0][i]+" : "+turn_to_do[1][i]
+			}
 		}
 
 		function check_day (answer,i){
@@ -148,6 +174,7 @@
 				if ($("#week_day .table_"+i+"").children("td:nth-child(2)").text() !== "" && TO == -1 && DO == -1 ){
 					TO = parseInt($("#week_day .table_"+i+"").children("td:nth-child(1)").text())
 					DO = parseInt($("#week_day .table_"+i+"").children("td:nth-child(1)").text())
+					
 				}else if ($("#week_day .table_"+i+"").children("td:nth-child(2)").text() !== "" && $("#week_day .table_"+i+"").children("td:nth-child(1)").text() > DO ){
 					DO = parseInt($("#week_day .table_"+i+"").children("td:nth-child(1)").text())
 				}
@@ -155,17 +182,25 @@
 
 			}
 			if($("select#week").val() < 6 && TO != -1 && DO !=-1){
-				$(".TO-DO").html("Cегодня с : "+alarm_TO[TO-1]+" до :"+alarm_DO[DO-1])
+				isDayWeek = ['!', 'Сегодня понедельник', 'Сегодня вторник', 'Сегодня среда', 'Сегодня четверг', 'Сегодня пятница'][$("select#week").val()] == getWeekDay() ? "Сегодня" : ["!","В понеднльник","Во вторник","В среду","В четверг","В пятницу"][$("select#week").val()]
+
+				$(".TO-DO").html(isDayWeek+" с : "+alarm_TO[TO-1]+" до :"+alarm_DO[DO-1])
+				chengeAlarm(TO,DO,alarm_TO,alarm_DO,to_do_Turn)
+
 			}else if ($("select#week").val() == 6 && TO != -1 && DO !=-1){
-				$(".TO-DO").html("Cегодня с : "+alarmS_TO[TO-1]+" до : "+alarmS_DO[DO-1])
+
+				isDayWeek = "Сегодня суббота" == getWeekDay() ? "Сегдня" : "В субботу"
+				$(".TO-DO").html(isDayWeek+" с : "+alarmS_TO[TO-1]+" до : "+alarmS_DO[DO-1])
+				chengeAlarm(TO,DO,alarmS_TO,alarmS_DO,to_do_STurn)
+
 			} else if ($("select#week").val() != 7) {
-				$(".TO-DO").html("Сегодня нет пар")
+				$(".TO-DO").html("В "+['Воскресенье', 'понедельник', 'вторник', 'среду', 'четверг', 'пятницу', 'субботу'][$("select#week").val()]+" нет пар")
 				$("#week_day").html("")
 			}
 			if($("select#week").val() == 7){
 				$(".TO-DO").html("")
 			}
-			
+			// alert("ТО:"+TO +" DO:"+DO)
 		};
 
 		$(document).ready(function (){
@@ -194,19 +229,6 @@
 								group: $("select.list").val(),
 								week: $("select#week").val()
 							},funcSeccess)
-						
-						// $.ajax({
-						// 	url: "request.php",
-						// 	type:"POST",
-						// 	data: { 
-						// 		change: $("input.change").val(),
-						// 		status: $("input.status").val(),
-						// 		group: $("select.list").val(),
-						// 		week: $("select#week").val()
-						// 	},
-						// 	datatype: "json",
-						// 	success: funcSeccess
-						// });
 					}else{
 						$("input.change").val("1");
 						ajaxRequest("request.php",{ 
@@ -215,18 +237,6 @@
 								group: $("select.list").val(),
 								week: $("select#week").val()
 							},funcSeccess)
-						// $.ajax({
-						// 	url: "request.php",
-						// 	type:"POST",
-						// 	data: { 
-						// 		change: $("input.change").val(),
-						// 		status: $("input.status").val(),
-						// 		group: $("select.list").val(),
-						// 		week: $("select#week").val()
-						// 	},
-						// 	datatype: "json",
-						// 	success: funcSeccess
-						// });
 					}
 				}else
 				{
@@ -237,18 +247,6 @@
 							teacher: $("select.list").val(),
 							week: $("select#week").val()
 						})
-					// $.ajax({
-					// 	url: "request.php",
-					// 	type:"POST",
-					// 	data: { 
-					// 		change: $("input.change").val(),
-					// 		status: $("input.status").val(),
-					// 		teacher: $("select.list").val(),
-					// 		week: $("select#week").val()
-					// 	},
-					// 	datatype: "json",
-					// 	success: funcSeccess
-					// });
 				}
 			})
 
@@ -281,7 +279,13 @@
 			//ЛОГИКА ДЛЯ МЕНЮ С ДНЯМИ НЕДЕЛИ
 
 			$("select#week").on("click", function(){
-				statusVal = document.querySelector("#nav li a.active").getAttribute("value");				
+				statusVal = document.querySelector("#nav li a.active").getAttribute("value");	
+				isWeek = $("select#week").val()	//document.querySelector("form.container").style.display = "none";	
+				if (isWeek == "7"){
+					document.querySelector(".progress").style.display = "none";
+				}else{
+					document.querySelector(".progress").style.display = "flex";
+				}	
 				if(statusVal == "0"){
 					ajaxRequest("request.php",{ 
 							change: $("input.change").val(),
@@ -331,9 +335,6 @@
 					$(".table_of_contents").children("th:nth-child(3)").html("Преподаватель");
 				}
 			});
-
-	
-
 		});
 	</script>
 
@@ -342,7 +343,7 @@
 </head>
 <body>
 	<h1>Расписание КЦПТ</h1>
-	<a href="#" class="btn btn-primary popup-btn">+</a>
+	<a href="#" class="btn btn-primary popup-btn">Настройки</a>
 	
 	
 	<form class="container" name="ginerat"  action="" method="post" style="display: none;">
@@ -453,53 +454,29 @@
 
         
 	</form>
+	<div class = "is_blur"></div>
 	<div class="container-progress">
-		<div class="time_day col-md-2"><script>$(".time_day").html(getWeekDay())</script></div>
-		<div class="progress" style="height: 20px;">
+		<div class="time_day"><script>$(".time_day").html(getWeekDay())</script></div>
+		<div class="progress" id="bar" style="height: 25px;">
 			<div class="time_alarm" style="width: 3.333%"></div>
-			<div class="time_alarm is_day" style="width: 9.999%"> <span class="popup-progress"><div>1 урок</div><div id="time_alarm_an_para">8:15 - 9:00</div></span>1</div>
-			<div class="time_alarm is_day" style="width: 9.999%"> <span class="popup-progress"><div>2 урок</div><div id="time_alarm_an_para">8:15 - 9:00</div></span>2</div>
-			<div class="time_alarm" style="width: 6.666%">#</div>
-			<div class="time_alarm is_day" style="width: 9.999%"> <span class="popup-progress"><div>3 урок</div><div id="time_alarm_an_para">8:15 - 9:00</div></span>3</div>
-			<div class="time_alarm is_day" style="width: 9.999%"> <span class="popup-progress"><div>4 урок</div><div id="time_alarm_an_para">8:15 - 9:00</div></span>4</div>
-			<div class="time_alarm" style="width: 6.666%">#</div>
-			<div class="time_alarm is_day" style="width: 9.999%"> <span class="popup-progress"><div>5 урок</div><div id="time_alarm_an_para">8:15 - 9:00</div></span>5</div>
-			<div class="time_alarm" style="width: 9.999%"> <span class="popup-progress"><div>6 урок</div><div id="time_alarm_an_para">8:15 - 9:00</div></span>6</div>
-			<div class="time_alarm" style="width: 6.666%">#</div>
-			<div class="time_alarm" style="width: 9.999%"> <span class="popup-progress"><div>7 урок</div><div id="time_alarm_an_para">8:15 - 9:00</div></span>7</div>
-			<div class="time_alarm" style="width: 9.999%"> <span class="popup-progress"><div>8 урок</div><div id="time_alarm_an_para">8:15 - 9:00</div></span>8</div>
-			<div class="time_alarm" style="width: 6.666%">#</div>
-			<div class="time_alarm" style="width: 9.999%"> <span class="popup-progress"><div>9 урок</div><div id="time_alarm_an_para">8:15 - 9:00</div></span>9</div>
-			<div class="time_alarm" style="width: 9.999%"> <span class="popup-progress"><div>10 урок</div><div id="time_alarm_an_para">8:15 - 9:00</div></span>10</div>
-			<div class="time_alarm" style="width: 6.666%">#</div>
-			<div class="time_alarm" style="width: 9.999%"> <span class="popup-progress"><div>11 урок</div><div id="time_alarm_an_para">8:15 - 9:00</div></span>11</div>
-			<div class="time_alarm" style="width: 9.999%"> <span class="popup-progress"><div>12 урок</div><div id="time_alarm_an_para">8:15 - 9:00</div></span>12</div>
+			<div class="time_alarm lesson" style="width: 9.999%"> <span class="popup-progress"><div>1 урок</div><div class="time_alarm_an_para">8:15 - 9:00</div></span>1</div>
+			<div class="time_alarm lesson" style="width: 9.999%"> <span class="popup-progress"><div>2 урок</div><div class="time_alarm_an_para">9:00 - 9:45</div></span>2</div>
+			<div class="time_alarm turn" style="width: 6.666%"><span class="popup-progress"><div>Перемена</div><div class="time_alarm_an_para">9:45 - 10:00</div></span></div>
+			<div class="time_alarm lesson" style="width: 9.999%"> <span class="popup-progress"><div>3 урок</div><div class="time_alarm_an_para">10:00 - 10:45</div></span>3</div>
+			<div class="time_alarm lesson" style="width: 9.999%"> <span class="popup-progress"><div>4 урок</div><div class="time_alarm_an_para">10:45 - 11:30</div></span>4</div>
+			<div class="time_alarm turn" style="width: 6.666%"><span class="popup-progress"><div>Перемена</div><div class="time_alarm_an_para">11:30 - 12:00</div></span></div>
+			<div class="time_alarm lesson" style="width: 9.999%"> <span class="popup-progress"><div>5 урок</div><div class="time_alarm_an_para">12:00 - 12:45</div></span>5</div>
+			<div class="time_alarm lesson" style="width: 9.999%"> <span class="popup-progress"><div>6 урок</div><div class="time_alarm_an_para">12:45 - 13:30</div></span>6</div>
+			<div class="time_alarm turn" style="width: 6.666%"><span class="popup-progress"><div>Перемена</div><div class="time_alarm_an_para">13:30 - 14:00</div></span></div>
+			<div class="time_alarm lesson" style="width: 9.999%"> <span class="popup-progress"><div>7 урок</div><div class="time_alarm_an_para">14:00 - 14:45</div></span>7</div>
+			<div class="time_alarm lesson" style="width: 9.999%"> <span class="popup-progress"><div>8 урок</div><div class="time_alarm_an_para">14:45 - 15:30</div></span>8</div>
+			<div class="time_alarm turn" style="width: 6.666%"><span class="popup-progress"><div>Перемена</div><div class="time_alarm_an_para">15:30 - 15:45</div></span></div>
+			<div class="time_alarm lesson" style="width: 9.999%"> <span class="popup-progress"><div>9 урок</div><div class="time_alarm_an_para">15:45 - 16:30</div></span>9</div>
+			<div class="time_alarm lesson" style="width: 9.999%"> <span class="popup-progress"><div>10 урок</div><div class="time_alarm_an_para">16:30 - 17:15</div></span>10</div>
+			<div class="time_alarm turn" style="width: 6.666%"><span class="popup-progress"><div>Перемена</div><div class="time_alarm_an_para">17:15 - 17:25</div></span></div>
+			<div class="time_alarm lesson" style="width: 9.999%"> <span class="popup-progress"><div>11 урок</div><div class="time_alarm_an_para">17:25 - 18:10</div></span>11</div>
+			<div class="time_alarm lesson" style="width: 9.999%"> <span class="popup-progress"><div>12 урок</div><div class="time_alarm_an_para">18:10 - 18:55</div></span>12</div>
 			<div class="time_alarm" style="width: 3.333%"></div>
-			<!-- <div class="time_status" style="width: 5.999%" aria-valuenow="0.83335" aria-valuemin="0" aria-valuemax="100">Будни</div> -->
-		</div>
-		<div class="info_alarm">
-			<span>подробнее</span>
-		</div>
-		<div class="info_alarm_container">
-			<div class="progress-bar-info" style="width: 50px;">
-				<div class="time_alarm_info is_day_info"><span class="time_alarm_info_context">1 урок</span></div>
-				<div class="time_alarm_info is_day_info"><span class="time_alarm_info_context">2 урок</span></div>
-				<div class="time_alarm_info"><span class="time_alarm_info_context">Перемена</span></div>
-				<div class="time_alarm_info is_day_info"><span class="time_alarm_info_context">3 урок</span></div>
-				<div class="time_alarm_info is_day_info"><span class="time_alarm_info_context">4 урок</span></div>
-				<div class="time_alarm_info"><span class="time_alarm_info_context">Перемена</span></div>
-				<div class="time_alarm_info is_day_info"><span class="time_alarm_info_context">5 урок</span></div>
-				<div class="time_alarm_info"><span class="time_alarm_info_context">6 урок</span></div>
-				<div class="time_alarm_info"><span class="time_alarm_info_context">Перемена</span></div>
-				<div class="time_alarm_info"><span class="time_alarm_info_context">7 урок</span></div>
-				<div class="time_alarm_info"><span class="time_alarm_info_context">8 урок</span></div>
-				<div class="time_alarm_info"><span class="time_alarm_info_context">Перемена</span></div>
-				<div class="time_alarm_info"><span class="time_alarm_info_context">9 урок</span></div>
-				<div class="time_alarm_info"><span class="time_alarm_info_context">10 урок</span></div>
-				<div class="time_alarm_info"><span class="time_alarm_info_context">Перемена</span></div>
-				<div class="time_alarm_info"><span class="time_alarm_info_context">11 урок</span></div>
-				<div class="time_alarm_info"><span class="time_alarm_info_context">12 урок</span></div>
-			</div>
 		</div>
 	</div>
 	<?php 
@@ -553,12 +530,24 @@
 			if (form.style.display == "none"){
 				form.style.display = "block";
 				document.body.classList.add("no-scroll");
-				// document.querySelector("html").style.blur = "5px";
+				document.querySelector(".is_blur").classList.add("blur");
 			}
-			else{
-				form.style.display = "none";
+			if (!document.querySelector(".popup-btn.onc")){
+				ajaxRequest("request.php",{ 
+					change: $("input.change").val(),
+					status: "0",
+					group: $("select.list").val(),
+					week: $("select#week").val()
+				},funcSeccess);
+				document.querySelector(".popup-btn").classList.add("onc");
+			}
+		
+			document.querySelector(".is_blur.blur").addEventListener("click",function(){
+				document.querySelector("form.container").style.display = "none";
 				document.body.classList.remove("no-scroll");
-			}
+				document.querySelector(".is_blur").classList.remove("blur");
+			});
+		
 		});
 	</script>
 </body>
