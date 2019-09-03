@@ -206,7 +206,9 @@ function addChangeGroupWeek(array $answer,array $change_bd, $i){
 	$dbHost = 'localhost'; 
 	$dbUser = 'root'; 
 	$dbPass = ''; 
-	$dbName = 'timetable'; 
+	$dbName = 'project'; 
+
+	// print_r($_POST);
 
 	$link = mysqli_connect($dbHost,$dbUser,$dbPass,$dbName) or die ("ошибка".mysqli_connect_error($link));
 
@@ -214,20 +216,20 @@ function addChangeGroupWeek(array $answer,array $change_bd, $i){
 	{
 		if ($status == 0) 
 		{
-			$timetable_q = "SELECT timetable.number,lessons.name ,teachers.name ,rooms.name FROM timetable INNER JOIN lessons ON timetable.lesson = lessons.id INNER JOIN teachers ON timetable.teacher = teachers.id INNER JOIN rooms ON timetable.room = rooms.id WHERE (timetable.groupname = '".$group."' AND timetable.day = '".$week."') ORDER BY timetable.number,lessons.name;";
+			$timetable_q = "SELECT timetable.numlesson ,lesson.name ,teacher.name ,room.name FROM timetable INNER JOIN lesson ON timetable.lesson = lesson.id INNER JOIN teacher ON timetable.teacher = teacher.id INNER JOIN room ON timetable.room = room.id WHERE (timetable.group = '".$group."' AND timetable.week = '".$week."') ORDER BY timetable.numlesson,lesson.name;";
 		}else
 		{
-			$timetable_q = "SELECT timetable.number,lessons.name ,groups.name ,rooms.name FROM timetable INNER JOIN lessons ON timetable.lesson = lessons.id INNER JOIN groups ON timetable.groupname = groups.id INNER JOIN rooms ON timetable.room = rooms.id WHERE (timetable.teacher = '".$teacher."' AND timetable.day = '".$week."') ORDER BY timetable.number,lessons.name;";
+			$timetable_q = "SELECT timetable.numlesson,lesson.name ,group.name ,room.name FROM timetable INNER JOIN lesson ON timetable.lesson = lesson.id INNER JOIN group ON timetable.group = group.id INNER JOIN room ON timetable.room = room.id WHERE (timetable.teacher = '".$teacher."' AND timetable.week = '".$week."') ORDER BY timetable.numlesson,lesson.name;";
 		}
 	}
 	else
 	{
 		if ($status == 0) 
 		{
-			$timetable_q = "SELECT timetable.day,timetable.number,lessons.name ,teachers.name ,rooms.name FROM timetable INNER JOIN lessons ON timetable.lesson = lessons.id INNER JOIN teachers ON timetable.teacher = teachers.id INNER JOIN rooms ON timetable.room = rooms.id WHERE (timetable.groupname = '".$group."') ORDER BY  timetable.day,timetable.number,lessons.name";
+			$timetable_q = "SELECT timetable.week ,timetable.numlesson,lesson.name ,teacher.name ,room.name FROM timetable INNER JOIN lesson ON timetable.lesson = lesson.id INNER JOIN teacher ON timetable.teacher = teacher.id INNER JOIN room ON timetable.room = room.id WHERE (timetable.group = '".$group."') ORDER BY  timetable.week,timetable.numlesson,lesson.name";
 		}else
 		{
-			$timetable_q = "SELECT timetable.day,timetable.number,lessons.name ,groups.name ,rooms.name FROM timetable INNER JOIN lessons ON timetable.lesson = lessons.id INNER JOIN groups ON timetable.groupname = groups.id INNER JOIN rooms ON timetable.room = rooms.id WHERE (timetable.teacher = '".$teacher."') ORDER BY   timetable.day,timetable.number,lessons.name;";
+			$timetable_q = "SELECT timetable.week,timetable.numlesson,lesson.name ,group.name ,room.name FROM timetable INNER JOIN lesson ON timetable.lesson = lesson.id INNER JOIN group ON timetable.group = group.id INNER JOIN room ON timetable.room = room.id WHERE (timetable.teacher = '".$teacher."') ORDER BY   timetable.week,timetable.numlesson,lesson.name;";
 		}
 	}
 

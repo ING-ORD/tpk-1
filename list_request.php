@@ -3,7 +3,7 @@
 	$dbHost = 'localhost'; 
 	$dbUser = 'root'; 
 	$dbPass = ''; 
-	$dbName = 'timetable'; 
+	$dbName = 'project'; 
 	$answer = array();
 	$status =$_POST["status"];
 
@@ -11,10 +11,10 @@
 	
 	if ($status == 0) 
 	{
-		$timetable_q = "SELECT teachers.name FROM teachers;";
+		$timetable_q = "SELECT teacher.name FROM teacher;";
 	}else
 	{
-		$timetable_q = "SELECT groups.name FROM groups;";
+		$timetable_q = "SELECT group.name FROM group;";
 	}
 
 

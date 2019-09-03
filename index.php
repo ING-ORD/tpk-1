@@ -1,4 +1,4 @@
-<?php $dbHost = 'localhost'; $dbUser = 'root'; $dbPass = ''; $dbName = 'timetable'; 
+<?php $dbHost = 'localhost'; $dbUser = 'root'; $dbPass = ''; $dbName = 'project'; 
 ///Основной гинератор------------------------------------------------------
 	$link = mysqli_connect($dbHost,$dbUser,$dbPass,$dbName)
 	or die("ошибка".mysqli_connect_error($link));
@@ -14,11 +14,11 @@
 	<link rel="stylesheet" href="Style.css">
 	<link rel="stylesheet" href="CSScheckbox.css">
 	<link rel="stylesheet" href="CSSselectbox.css">
-	<script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+	<script src="jquery-3.3.1.min.js"></script>
 
 	<!-- JavaScript (JQuery) -->
 
-	<script type="text/javascript">
+	<script>
 		var alarm_TO = ["8:15","9:00","10:00","10:45","12:00","12:45","14:00","14:45","15:45","16:30","17:25","18:10"],
 			alarm_DO = ["9:00","9:45","10:45","11:30","12:45","13:30","14:45","15:30","16:30","17:15","18:10","18:55"],
 			alarmS_TO = ["8:15","9:00","9:50","10:35","11:50","12:35","13:30","14:15","15:10","15:55","16:45","17:30"],
@@ -80,7 +80,7 @@
 				var teacher_2 = answer[i].list.substring(answer[i].list.indexOf("|")+1,answer[i].list.length);
 				var room_2 = answer[i].room.substring(answer[i].room.indexOf("|")+1,answer[i].room.length);
 
-				html = "<tr class=\"table_"+i+"\"> <td class=\"cell_1\" rowspan =\"2\" >"+answer[i].number+"</td> <td class=\"cell_2\">"+lesson_1+"</td> <td class=\"cell_3\">"+teacher_1+"</td> <td class=\"cell_4\">"+room_1+"</td> </tr> <tr class=\"table_"+i+"\"> <td class=\"cell_2\">"+lesson_2+"</td> <td class=\"cell_3\">"+teacher_2+"</td> <td class=\"cell_4\">"+room_1+"</td> </tr>";
+				html = "<tr class=\"table_"+i+"\"> <td class=\"cell_1\" rowspan =\"2\" >"+answer[i].number+"</td> <td class=\"cell_2\">"+lesson_1+"</td> <td class=\"cell_3\">"+teacher_1+"</td> <td class=\"cell_4\">"+room_1+"</td> </tr> <tr class=\"table_"+i+"\"> <td class=\"cell_2\">"+lesson_2+"</td> <td class=\"cell_3\">"+teacher_2+"</td> <td class=\"cell_4\">"+room_2+"</td> </tr>";
 				return html;
 			}else{
 				html = "<tr class=\"table_"+ i +"\"><td class=\"cell_1\">"+ answer[i].number +"</td><td class=\"cell_2\">"+ answer[i].lesson +"</td><td class=\"cell_3\">"+ answer[i].list +"</td><td class=\"cell_4\">"+ answer[i].room +"</td></tr>";
@@ -336,6 +336,8 @@
 				}
 			});
 		});
+		console.log("ALL JOB");
+
 	</script>
 
 	<!--End JavaScript (Jquery)!-->
@@ -378,35 +380,17 @@
 				<a class="btn btn-primary btn-change" href="https://docs.google.com/file/d/0Bzp0m-6aOGdLZVFwcHdUcElLY2c/preview" target="_blank">Изменения</a>
 			</div>
 			
-			<!-- <div class="but-alarm col-md-5">
 			
-				<div class="btn btn-primary but-alarm_text">Звонки</div>
-				<div style="display: none;" class="popap">
-					<div class="blyr"></div>
-					<div class="but-alarm_cont">
-						<table class="content">
-							<tr><th>Понеденельник-<br>Пятница</th><th>Суббота</th></tr>
-							<?php 
-								//for ($i=0; $i < 12; $i++) { ?>
-								<script>
-									$(".but-alarm_cont table.content").append("<tr><td>"+ alarm_TO[<?php //echo ($i); ?>]+ "-" + alarm_DO[<?php //echo ($i); ?>] + "</td><td>"+ alarmS_TO[<?php echo ($i); ?>]+ "-" + alarmS_DO[<?php echo ($i); ?>] +"</td></tr>");
-								</script>
-								<?php// }
-							?>
-						</table>
-					</div>
-				</div>
-			</div> -->
 		</div>
 		<div class="row justify-content-between">
 				
 
 			<?php
 
+
 				$query_week = "SELECT week.name FROM week;";
 
-				$result_week = mysqli_query($link,$query_week) 
-				or die("ошибка ".mysqli_connect_error($link));
+				$result_week = mysqli_query($link,$query_week) or die("ошибка ".mysqli_connect_error($link));
 				$rows_week  = mysqli_num_rows($result_week);
 
 				echo "<div class=\"week_form  col-md-5\"><div class=\"row\"><div class=\"col-md-4\"><label style=\"display: inline-block; width: 125px\">День недели</label></div>";
@@ -419,12 +403,12 @@
 				mysqli_free_result($result_week);
 				echo "</select></div></div></div>";
 			?>
+			
 			<?php 
-				$query_groups = "SELECT groups.name FROM groups;";
+				$query_groups = "SELECT `group`.name FROM `group`;";
 
-				$result_groups = mysqli_query($link,$query_groups) 
-				or die("ошибка ".mysqli_connect_error($link));
-
+				$result_groups = mysqli_query($link,$query_groups) or die("ошибка ".mysqli_connect_error($link));
+				
 				$rows_groups  = mysqli_num_rows($result_groups);
 				echo "<div class=\"list_form  col-md-5\"><label id=\"status\" style=\"display: inline-block; width: 85px\">Группа</label>";
 				echo "<select name='groups' class= 'list box' id='groups'>";
@@ -440,6 +424,7 @@
 				mysqli_free_result($result_groups);
 				echo "</select></div>";
 			?>
+			
 		</div>
 
 			<!-- <div class="change">
@@ -454,6 +439,7 @@
 
         
 	</form>
+	
 	<div class = "is_blur"></div>
 	<div class="container-progress">
 		<div class="time_day"><script>$(".time_day").html(getWeekDay())</script></div>
@@ -495,37 +481,41 @@
 		</div>
 	</div>
 	<script>
-		var linkNav = document.getElementById("nav")
+		var linkNav = document.getElementById("nav");
 		linkNav.addEventListener('click', function(e) {
-			if (!e.target.classList.contains('nav-link') || e.target.classList.contains("disabled")) 
+			if (!e.target.classList.contains('nav-link') || e.target.classList.contains("disabled")) {
 				return; 
-			e.preventDefault();                                
-			for (let link of this.querySelectorAll('li a.nav-link'))  
+			}
+			// e.preventDefault();                                
+			for (let link of this.querySelectorAll('li a.nav-link'))  {
 				link.classList.remove('active'); 
+			}
 			e.target.classList.add('active');
 			if (e.target.classList.contains('status0')){
 				ajaxRequest("list_request.php",{
 						status: "0"
-					},funcList)
+					},funcList);
 				ajaxRequest("request.php",{ 
 						change: $("input.change").val(),
 						status: "1",
 						teacher: $("select.list").val(),
 						week: $("select#week").val()
-					},funcSeccess)
+					},funcSeccess);
 			}else if ( e.target.classList.contains('status1') ) {
 				ajaxRequest("list_request.php",{
 						status: "1"
-					},funcList)
+					},funcList);
 				ajaxRequest("request.php",{ 
 					change: $("input.change").val(),
 					status: "0",
 					group: $("select.list").val(),
 					week: $("select#week").val()
-				},funcSeccess)
+				},funcSeccess);
 			}          
 		}); 
 		document.querySelector(".popup-btn").addEventListener("click",function(){
+			console.log("JOB");
+			
 			var form = document.querySelector("form.container");
 			if (form.style.display == "none"){
 				form.style.display = "block";
@@ -549,6 +539,7 @@
 			});
 		
 		});
+		console.log("ALL JOB");
 	</script>
 </body>
 </html>
